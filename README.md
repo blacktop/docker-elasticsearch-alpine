@@ -19,11 +19,11 @@ docker run -d -p 9200:9200 blacktop/elasticsearch
 
 ### Issues
 
-Find a bug? Want more features? Find something missing in the documentation? Let me know! Please don't hesitate to [file an issue](https://github.com/blacktop/docker-elasticsearch-alpine/issues/new) and I'll get right on it.
+Find a bug? Want more features? Find something missing in the documentation? Let me know! Please don't hesitate to [file an issue](https://github.com/blacktop/docker-elasticsearch-alpine/issues/new)
 
 ### Credits
 
-Heavily influenced by https://github.com/docker-library/elasticsearch
+Heavily (if not entirely) influenced by https://github.com/docker-library/elasticsearch
 
 ### License
 
