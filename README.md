@@ -23,6 +23,8 @@ Find a bug? Want more features? Find something missing in the documentation? Let
 
 ### Credits
 
+Heavily influenced by https://github.com/docker-library/elasticsearch
+
 ### License
 
 MIT Copyright (c) 2016 **blacktop**
