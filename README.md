@@ -15,19 +15,6 @@ Alpine Linux based Elasticsearch Docker Image
 docker run -d -p 9200:9200 blacktop/elasticsearch
 ```
 
-### To Run on OSX
-
--	Install [Homebrew](http://brew.sh)
-
-```bash
-$ brew install caskroom/cask/brew-cask
-$ brew cask install virtualbox
-$ brew install docker
-$ brew install docker-machine
-$ docker-machine create --driver virtualbox
-$ eval $(docker-machine env)
-```
-
 ### Documentation
 
 ### Issues
