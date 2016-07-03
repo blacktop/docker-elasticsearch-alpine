@@ -2,13 +2,11 @@ FROM gliderlabs/alpine
 
 MAINTAINER blacktop, https://github.com/blacktop
 
-ENV KIBANA 4.5
 ENV ELASTIC 2.3.3
-ENV LOGSTASH 2.3
-ENV GOSU_VERSION 1.7
-ENV GOSU_URL https://github.com/tianon/gosu/releases/download
 
 # Grab gosu for easy step-down from root
+ENV GOSU_VERSION 1.7
+ENV GOSU_URL https://github.com/tianon/gosu/releases/download
 RUN apk-install -t build-deps wget ca-certificates gpgme \
 	&& wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64" \
 	&& wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64.asc" \
