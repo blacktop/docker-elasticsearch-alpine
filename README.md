@@ -15,6 +15,12 @@ Alpine Linux based Elasticsearch Docker Image
 docker run -d -p 9200:9200 blacktop/elasticsearch
 ```
 
+> **NOTE:** If you want to jack up the heap use:`ES_JAVA_OPTS="-Xms2g -Xmx2g"`, which sets the HEAP_MAX and HEAP_MIN to 2GB.
+
+```
+docker run -d -p 9200:9200 -e ES_JAVA_OPTS="-Xms2g -Xmx2g" blacktop/elasticsearch
+```
+
 ### Documentation
 
 ### Issues
