@@ -12,13 +12,21 @@ Alpine Linux based Elasticsearch Docker Image
 ### Usage
 
 ```
-docker run -d -p 9200:9200 blacktop/elasticsearch
+docker run -d --name elastic -p 9200:9200 blacktop/elasticsearch
 ```
 
-> **NOTE:** If you want to jack up the heap use:`ES_JAVA_OPTS="-Xms2g -Xmx2g"`, which sets the HEAP_MAX and HEAP_MIN to 2GB.
+To increase the HEAP_MAX and HEAP_MIN to 2GB.
 
 ```
-docker run -d -p 9200:9200 -e ES_JAVA_OPTS="-Xms2g -Xmx2g" blacktop/elasticsearch
+docker run -d --name elastic -p 9200:9200 -e ES_JAVA_OPTS="-Xms2g -Xmx2g" blacktop/elasticsearch
+```
+
+To monitor the clusters metrics:
+
+```bash
+$ curl https://raw.githubusercontent.com/Ingensi/dockerbeat/develop/etc/dockerbeat.template.json \
+  | curl -H "Content-Type: application/json" -XPUT -d @- 'http://localhost:9200/_template/dockerbeat'
+$ docker run -d -v /var/run/docker.sock:/var/run/docker.sock --link elastic:elasticsearch ingensi/dockerbeat
 ```
 
 ### Documentation
