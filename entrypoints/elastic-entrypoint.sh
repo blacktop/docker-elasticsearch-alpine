@@ -17,6 +17,61 @@ if [ "$1" = 'elasticsearch' -a "$(id -u)" = '0' ]; then
 	#exec gosu elasticsearch "$BASH_SOURCE" "$@"
 fi
 
+if [ "$1" = 'kopf' -a "$(id -u)" = '0' ]; then
+	# Install kopf plugin
+	plugin install lmenezes/elasticsearch-kopf/v2.1.1
+
+	# Change the ownership of /usr/share/elasticsearch/data to elasticsearch
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
+
+	set -- gosu elasticsearch tini -- elasticsearch
+	#exec gosu elasticsearch "$BASH_SOURCE" "$@"
+fi
+
+if [ "$1" = 'master' -a "$(id -u)" = '0' ]; then
+	# Change node into a master node
+	echo "node.master: true" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.client: false" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.data: false" >> /usr/share/elasticsearch/config/elasticsearch.yml
+
+	# Change the ownership of /usr/share/elasticsearch/data to elasticsearch
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
+
+	set -- gosu elasticsearch tini -- elasticsearch
+	#exec gosu elasticsearch "$BASH_SOURCE" "$@"
+fi
+
+if [ "$1" = 'client' -a "$(id -u)" = '0' ]; then
+	# Change node into a client node
+	echo "node.master: false" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.client: true" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.data: false" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "discovery.zen.ping.unicast.hosts: [\"elastic-master\"]" >> /usr/share/elasticsearch/config/elasticsearch.yml
+
+	# Install kopf plugin
+	plugin install lmenezes/elasticsearch-kopf/v2.1.1
+
+	# Change the ownership of /usr/share/elasticsearch/data to elasticsearch
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
+
+	set -- gosu elasticsearch tini -- elasticsearch
+	#exec gosu elasticsearch "$BASH_SOURCE" "$@"
+fi
+
+if [ "$1" = 'data' -a "$(id -u)" = '0' ]; then
+	# Change node into a data node
+	echo "node.master: false" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.client: false" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.data: true" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "discovery.zen.ping.unicast.hosts: [\"elastic-master\"]" >> /usr/share/elasticsearch/config/elasticsearch.yml
+
+	# Change the ownership of /usr/share/elasticsearch/data to elasticsearch
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
+
+	set -- gosu elasticsearch tini -- elasticsearch
+	#exec gosu elasticsearch "$BASH_SOURCE" "$@"
+fi
+
 # As argument is not related to elasticsearch,
 # then assume that user wants to run his own process,
 # for example a `bash` shell to explore this image
