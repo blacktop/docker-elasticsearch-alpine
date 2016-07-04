@@ -1,4 +1,4 @@
-![es-logo](https://raw.githubusercontent.com/blacktop/docker-elk/master/docs/es-logo.png)
+![es-logo](https://raw.githubusercontent.com/blacktop/docker-elasticsearch-alpine/master/es-logo.png)
 
 docker-elasticsearch-alpine
 ===========================
