@@ -5,9 +5,26 @@ docker-elasticsearch-alpine
 
 Alpine Linux based Elasticsearch Docker Image
 
+### Why?
+
+Compare Image Sizes:  
+ - official elasticsearch = 354.8 MB  
+ - blacktop/elasticsearch = 141 MB
+
+**Alpine version is 213 MB smaller !**
+
 ### Dependencies
 
 -	[gliderlabs/alpine](https://index.docker.io/_/gliderlabs/alpine/)
+
+### Image Tags
+
+```bash
+$ docker images
+
+REPOSITORY                    TAG                 VIRTUAL SIZE
+blacktop/elasticsearch        latest              141   MB
+```
 
 ### Usage
 
