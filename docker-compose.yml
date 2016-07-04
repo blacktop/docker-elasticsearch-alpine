@@ -1,0 +1,41 @@
+version: "2"
+
+services:
+  master:
+    image: blacktop/elasticsearch
+    command: master
+    networks:
+      - elasitc
+  client:
+    image: blacktop/elasticsearch
+    command: client
+    ports:
+      - "9200:9200"
+    links:
+     - master:elastic-master
+    networks:
+      - elasitc
+  data:
+    image: blacktop/elasticsearch
+    environment:
+      - ES_JAVA_OPTS=-Xms2g -Xmx2g
+    command: data
+    links:
+     - master:elastic-master
+    networks:
+      - elasitc
+  kibana:
+    image: kibana
+    ports:
+      - "5601:5601"
+    links:
+     - client:elasticsearch
+    networks:
+      - elasitc
+
+# volumes:
+#   es-data:
+
+networks:
+  elasitc:
+    driver: bridge
