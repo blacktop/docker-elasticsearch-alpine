@@ -21,7 +21,7 @@ To increase the HEAP_MAX and HEAP_MIN to 2GB.
 docker run -d --name elastic -p 9200:9200 -e ES_JAVA_OPTS="-Xms2g -Xmx2g" blacktop/elasticsearch
 ```
 
-To monitor the clusters metrics:
+To monitor the clusters metrics using [dockerbeat](https://github.com/Ingensi/dockerbeat):
 
 ```bash
 $ curl https://raw.githubusercontent.com/Ingensi/dockerbeat/develop/etc/dockerbeat.template.json \
