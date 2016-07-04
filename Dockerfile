@@ -2,9 +2,9 @@ FROM gliderlabs/alpine
 
 MAINTAINER blacktop, https://github.com/blacktop
 
-ENV ELASTIC 2.3.3
+RUN apk-install openjdk8-jre tini
 
-# Grab gosu for easy step-down from root
+# Grab *gosu* for easy step-down from root
 ENV GOSU_VERSION 1.7
 ENV GOSU_URL https://github.com/tianon/gosu/releases/download
 RUN apk-install -t build-deps wget ca-certificates gpgme \
@@ -18,7 +18,8 @@ RUN apk-install -t build-deps wget ca-certificates gpgme \
 	&& gosu nobody true \
   && apk del --purge build-deps
 
-RUN apk-install openjdk8-jre
+ENV ELASTIC 2.3.3
+
 RUN apk-install -t build-deps wget ca-certificates \
   && cd /tmp \
   && wget -O elasticsearch-$ELASTIC.tar.gz https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/$ELASTIC/elasticsearch-$ELASTIC.tar.gz \
