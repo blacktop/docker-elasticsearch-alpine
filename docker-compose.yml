@@ -5,7 +5,7 @@ services:
     image: blacktop/elasticsearch
     command: master
     networks:
-      - elasitc
+      - elastic
   client:
     image: blacktop/elasticsearch
     command: client
@@ -14,7 +14,7 @@ services:
     links:
      - master:elastic-master
     networks:
-      - elasitc
+      - elastic
   data:
     image: blacktop/elasticsearch
     environment:
@@ -23,7 +23,7 @@ services:
     links:
      - master:elastic-master
     networks:
-      - elasitc
+      - elastic
   kibana:
     image: kibana
     ports:
@@ -31,11 +31,11 @@ services:
     links:
      - client:elasticsearch
     networks:
-      - elasitc
+      - elastic
 
 # volumes:
 #   es-data:
 
 networks:
-  elasitc:
+  elastic:
     driver: bridge

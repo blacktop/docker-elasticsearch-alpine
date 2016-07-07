@@ -42,7 +42,7 @@ $ docker run -d --name elastic -p 9200:9200 blacktop/elasticsearch
 $ docker run -d --name elastic -p 9200:9200 -e ES_JAVA_OPTS="-Xms2g -Xmx2g" blacktop/elasticsearch
 ```
 
-##### To create a elasticsearch cluster
+##### To create an elasticsearch cluster
 
 ```bash
 $ docker run -d --name elastic-master blacktop/elasticsearch master
