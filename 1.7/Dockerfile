@@ -25,7 +25,7 @@ ENV ELASTIC 1.7.5
 
 RUN apk-install -t build-deps wget ca-certificates \
   && cd /tmp \
-  && wget -O elasticsearch-$ELASTIC.tar.gz https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/$ELASTIC/elasticsearch-$ELASTIC.tar.gz \
+  && wget -O elasticsearch-$ELASTIC.tar.gz https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-$ELASTIC.tar.gz \
   && tar -xzf elasticsearch-$ELASTIC.tar.gz \
   && mv elasticsearch-$ELASTIC /usr/share/elasticsearch \
   && adduser -DH -s /sbin/nologin elasticsearch \
