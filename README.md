@@ -18,6 +18,8 @@ Alpine Linux based Elasticsearch Docker Image
         - [To increase the HEAP_MAX and HEAP_MIN to 2GB.](#to-increase-the-heap_max-and-heap_min-to-2gb)
         - [To create an elasticsearch cluster](#to-create-an-elasticsearch-cluster)
         - [To monitor the clusters metrics using dockerbeat:](#to-monitor-the-clusters-metrics-using-dockerbeat)
+    - [Known Issues](#known-issues)
+      - [5.0 failing to start](#50-failing-to-start)
     - [Issues](#issues)
     - [Credits](#credits)
     - [CHANGELOG](#changelog)
@@ -89,6 +91,12 @@ $ curl https://raw.githubusercontent.com/Ingensi/dockerbeat/develop/etc/dockerbe
   | curl -H "Content-Type: application/json" -XPUT -d @- 'http://localhost:9200/_template/dockerbeat'
 $ docker run -d -v /var/run/docker.sock:/var/run/docker.sock --link elastic:elasticsearch ingensi/dockerbeat
 ```
+
+### Known Issues
+
+#### 5.0 failing to start
+
+In order to use `blacktop/elasticsearch:5.0` you must also supply the environment variable: `ES_JAVA_OPTS="-Xms2g -Xmx2g"` for it to successfully start.
 
 ### Issues
 
