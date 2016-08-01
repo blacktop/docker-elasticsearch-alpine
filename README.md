@@ -41,8 +41,11 @@ Compare Image Sizes:
 ### Image Tags
 
 ```bash
-REPOSITORY                    TAG                 VIRTUAL SIZE
-blacktop/elasticsearch        latest              141   MB
+REPOSITORY               TAG                 SIZE
+blacktop/elasticsearch   latest              141.7 MB
+blacktop/elasticsearch   5.0                 145.7 MB
+blacktop/elasticsearch   2.3                 141.7 MB
+blacktop/elasticsearch   1.7                 145.4 MB
 ```
 
 ### Getting Started
