@@ -80,7 +80,8 @@ $ docker run -d --name kibana -p 5601:5601 --link elastic-client:elasticsearch k
 Or you can use [docker-compose](https://docs.docker.com/compose/):
 
 ```bash
-$ curl -o ./docker-compose.yml https://raw.githubusercontent.com/blacktop/docker-elasticsearch-alpine/master/docker-compose.yml
+$ curl -sL https://raw.githubusercontent.com/blacktop/docker-elasticsearch-alpine/master/docker-compose.yml \
+  > docker-compose.yml
 $ docker-compose up -d
 $ docker-compose scale data=3
 ```
