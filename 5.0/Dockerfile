@@ -23,10 +23,6 @@ RUN apk-install -t build-deps wget ca-certificates gpgme \
 
 ENV ELASTIC 5.0.0-alpha4
 
-# This is needed for it to run
-# I think it is a bug with the alpha version
-ENV ES_JAVA_OPTS "-Xms2g -Xmx2g"
-
 RUN apk-install bash
 RUN apk-install -t build-deps wget ca-certificates \
   && cd /tmp \
@@ -54,6 +50,11 @@ COPY elastic-entrypoint.sh /
 WORKDIR /usr/share/elasticsearch
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
+
+
+# This is needed for it to run
+# I think it is a bug with the alpha version
+ENV ES_JAVA_OPTS "-Xms2g -Xmx2g"
 
 VOLUME ["/usr/share/elasticsearch/data"]
 
