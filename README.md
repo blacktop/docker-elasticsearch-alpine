@@ -22,8 +22,6 @@ Compare Image Sizes:
 ### Image Tags
 
 ```bash
-$ docker images
-
 REPOSITORY                    TAG                 VIRTUAL SIZE
 blacktop/elasticsearch        latest              141   MB
 ```
