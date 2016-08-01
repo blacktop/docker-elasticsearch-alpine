@@ -2,12 +2,15 @@ FROM gliderlabs/alpine:3.4
 
 MAINTAINER blacktop, https://github.com/blacktop
 
-RUN apk-install openjdk8-jre tini
-
-# Grab *gosu* for easy step-down from root
 ENV GOSU_VERSION 1.7
 ENV GOSU_URL https://github.com/tianon/gosu/releases/download
+
+# Install java and tini
+RUN apk-install openjdk8-jre tini
+# Install gosu
 RUN apk-install -t build-deps wget ca-certificates gpgme \
+  && set -x \
+	&& echo "Grab *gosu* for easy step-down from root..." \
 	&& wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64" \
 	&& wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64.asc" \
 	&& export GNUPGHOME="$(mktemp -d)" \
@@ -18,7 +21,7 @@ RUN apk-install -t build-deps wget ca-certificates gpgme \
 	&& gosu nobody true \
   && apk del --purge build-deps
 
-ENV ELASTIC 2.3.3
+ENV ELASTIC 1.7.5
 
 RUN apk-install -t build-deps wget ca-certificates \
   && cd /tmp \
@@ -41,13 +44,13 @@ RUN apk-install -t build-deps wget ca-certificates \
   && apk del --purge build-deps
 
 COPY config/elastic /usr/share/elasticsearch/config
-COPY entrypoints/elastic-entrypoint.sh /
-RUN chmod +x /elastic-entrypoint.sh
-
-VOLUME ["/usr/share/elasticsearch/data"]
-EXPOSE 9200 9300
+COPY elastic-entrypoint.sh /
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
+
+VOLUME ["/usr/share/elasticsearch/data"]
+
+EXPOSE 9200 9300
 
 ENTRYPOINT ["/elastic-entrypoint.sh"]
 
