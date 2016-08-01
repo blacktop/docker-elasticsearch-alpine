@@ -34,6 +34,8 @@ $ docker run -d --name elastic -p 9200:9200 blacktop/elasticsearch
 
 ### Documentation
 
+> **NOTE:** Example usage assumes you are using [Docker for Mac](https://docs.docker.com/docker-for-mac/)
+
 ##### To increase the HEAP_MAX and HEAP_MIN to 2GB.
 
 ```bash
@@ -70,8 +72,6 @@ $ curl https://raw.githubusercontent.com/Ingensi/dockerbeat/develop/etc/dockerbe
   | curl -H "Content-Type: application/json" -XPUT -d @- 'http://localhost:9200/_template/dockerbeat'
 $ docker run -d -v /var/run/docker.sock:/var/run/docker.sock --link elastic:elasticsearch ingensi/dockerbeat
 ```
-
-> NOTE: Example usage assumes you are using [Docker for Mac](https://docs.docker.com/docker-for-mac/)
 
 ### Issues
 
