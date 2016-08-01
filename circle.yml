@@ -1,0 +1,30 @@
+machine:
+  services:
+    - docker
+
+general:
+  build_dir: "2.3"
+
+dependencies:
+  cache_directories:
+    - "~/docker"
+  override:
+    - docker info
+    - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
+    - docker build -t blacktop/elasticsearch .
+    - mkdir -p ~/docker; docker save blacktop/elasticsearch > ~/docker/image.tar
+
+test:
+  override:
+    - docker run -d -p 9200:9200 blacktop/elasticsearch; sleep 10
+    - curl --retry 10 --retry-delay 5 -v http://localhost:9200
+
+deployment:
+  # master:
+  #   branch: master
+  #   commands:
+  #     - eval $(docker run gliderlabs/pagebuilder circleci-cmd)
+  release:
+    branch: release
+    commands:
+      - make release
