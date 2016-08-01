@@ -7,6 +7,23 @@ docker-elasticsearch-alpine
 
 Alpine Linux based Elasticsearch Docker Image
 
+**Table of Contents**
+
+- [docker-elasticsearch-alpine](#docker-elasticsearch-alpine)
+    - [Why?](#why)
+    - [Dependencies](#dependencies)
+    - [Image Tags](#image-tags)
+    - [Getting Started](#getting-started)
+    - [Documentation](#documentation)
+        - [To increase the HEAP_MAX and HEAP_MIN to 2GB.](#to-increase-the-heap_max-and-heap_min-to-2gb)
+        - [To create an elasticsearch cluster](#to-create-an-elasticsearch-cluster)
+        - [To monitor the clusters metrics using dockerbeat:](#to-monitor-the-clusters-metrics-using-dockerbeat)
+    - [Issues](#issues)
+    - [Credits](#credits)
+    - [CHANGELOG](#changelog)
+    - [Contributing](#contributing)
+    - [License](#license)
+
 ### Why?
 
 Compare Image Sizes:  
@@ -17,7 +34,7 @@ Compare Image Sizes:
 
 ### Dependencies
 
--	[gliderlabs/alpine](https://index.docker.io/_/gliderlabs/alpine/)
+-	[gliderlabs/alpine:3.4](https://index.docker.io/_/gliderlabs/alpine/)
 
 ### Image Tags
 
