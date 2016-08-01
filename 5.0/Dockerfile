@@ -23,6 +23,7 @@ RUN apk-install -t build-deps wget ca-certificates gpgme \
 
 ENV ELASTIC 5.0.0-alpha4
 
+RUN apk-install bash
 RUN apk-install -t build-deps wget ca-certificates \
   && cd /tmp \
   && wget -O elasticsearch-$ELASTIC.tar.gz https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/$ELASTIC/elasticsearch-$ELASTIC.tar.gz \
@@ -45,6 +46,8 @@ RUN apk-install -t build-deps wget ca-certificates \
 
 COPY config/elastic /usr/share/elasticsearch/config
 COPY elastic-entrypoint.sh /
+
+WORKDIR /usr/share/elasticsearch
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
