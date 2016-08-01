@@ -48,6 +48,8 @@ blacktop/elasticsearch   2.3                 141.7 MB
 blacktop/elasticsearch   1.7                 145.4 MB
 ```
 
+> NOTE: tag 5.0 requires at least 2GB of RAM to run.
+
 ### Getting Started
 
 ```bash
@@ -99,7 +101,8 @@ $ docker run -d -v /var/run/docker.sock:/var/run/docker.sock --link elastic:elas
 
 #### 5.0 failing to start
 
-In order to use `blacktop/elasticsearch:5.0` you must also supply the environment variable: `ES_JAVA_OPTS="-Xms2g -Xmx2g"` for it to successfully start.
+In order to use `blacktop/elasticsearch:5.0` you must also supply the environment variable: `ES_JAVA_OPTS="-Xms2g -Xmx2g"` for it to successfully start.  
+I am including it by default in the Dockerfile for now.
 
 ### Issues
 
