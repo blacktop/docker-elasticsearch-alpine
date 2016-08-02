@@ -44,6 +44,7 @@ RUN apk-install -t build-deps wget ca-certificates \
   && apk del --purge build-deps
 
 COPY config/elastic /usr/share/elasticsearch/config
+COPY config/logrotate /etc/logrotate.d/elasticsearch
 COPY elastic-entrypoint.sh /
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH

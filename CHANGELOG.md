@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 
 -	krallin/tini
 -	tianon/gosu
+- logrotate
 
 ### Removed
 
@@ -26,6 +27,7 @@ All notable changes to this project will be documented in this file.
 
 -	krallin/tini
 -	tianon/gosu
+- logrotate
 
 ### Removed
 
@@ -40,6 +42,7 @@ All notable changes to this project will be documented in this file.
 
 -	krallin/tini
 -	tianon/gosu
+- logrotate
 
 ### Removed
 
