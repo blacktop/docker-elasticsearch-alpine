@@ -21,7 +21,7 @@ RUN apk-install -t build-deps wget ca-certificates gpgme \
 	&& gosu nobody true \
   && apk del --purge build-deps
 
-ENV ELASTIC 5.0.0-alpha4
+ENV ELASTIC 5.0.0-alpha5
 
 RUN apk-install bash
 RUN apk-install -t build-deps wget ca-certificates \
