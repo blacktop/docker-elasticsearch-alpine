@@ -48,9 +48,6 @@ if [ "$1" = 'client' -a "$(id -u)" = '0' ]; then
 	echo "node.data: false" >> /usr/share/elasticsearch/config/elasticsearch.yml
 	echo "discovery.zen.ping.unicast.hosts: [\"elastic-master\"]" >> /usr/share/elasticsearch/config/elasticsearch.yml
 
-	# Install kopf plugin
-	plugin install lmenezes/elasticsearch-kopf/v2.1.1
-
 	# Change the ownership of /usr/share/elasticsearch/data to elasticsearch
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
 
