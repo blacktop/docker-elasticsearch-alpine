@@ -48,7 +48,7 @@ blacktop/elasticsearch   2.3                 141.7 MB
 blacktop/elasticsearch   1.7                 145.4 MB
 ```
 
-> **NOTE:** tag **kopf** includes the *kopf* plugin.  
+> **NOTE:** tag **kopf** is the same as tag **latest**, but includes the *kopf* plugin.  
 
 ### Getting Started
 
