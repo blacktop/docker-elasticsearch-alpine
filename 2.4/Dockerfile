@@ -57,4 +57,5 @@ EXPOSE 9200 9300
 ENTRYPOINT ["/elastic-entrypoint.sh"]
 CMD ["elasticsearch"]
 
-HEALTHCHECK CMD ["docker-healthcheck"]
+# HEALTHCHECK \
+#   CMD ["docker-healthcheck"]
