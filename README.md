@@ -66,7 +66,7 @@ $ docker run -d --name elastic -p 9200:9200 blacktop/elasticsearch
 ##### To increase the HEAP_MAX and HEAP_MIN to 2GB.
 
 ```bash
-$ docker run -d --name elastic -p 9200:9200 -e ES_JAVA_OPTS="-Xms2g -Xmx2g" blacktop/elasticsearch
+$ docker run -d --name elastic -p 9200:9200 -e ES_HEAP_SIZE="2g" blacktop/elasticsearch
 ```
 
 ##### To create an elasticsearch cluster
@@ -101,13 +101,38 @@ $ curl https://raw.githubusercontent.com/Ingensi/dockerbeat/develop/etc/dockerbe
 $ docker run -d -v /var/run/docker.sock:/var/run/docker.sock --link elastic:elasticsearch ingensi/dockerbeat
 ```
 
+##### Run in Production  
+
+On Ubuntu you have to edit ``/etc/default/grub` file and add this line:
+
+```
+GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"
+```
+
+Then run sudo update-grub and reboot the server.
+
+```bash
+$ docker run -d \
+         --name elastic \
+         --cap-add=IPC_LOCK --ulimit nofile=65536:65536 --ulimit memlock=-1:-1 \
+	       --memory="4g" --memory-swap="4g" --memory-swappiness=0 \
+	       -e ES_HEAP_SIZE="2g" \
+         blacktop/elasticsearch:kopf \
+         -Des.bootstrap.mlockall=true \
+         -Des.network.host=_eth0_ \
+         -Des.discovery.zen.ping.multicast.enabled=false
+```
+
+> **NOTE:** This will limit the container memory to 4GB and the ES heap size to 2GB.  This also will prevent the container from being able to swap its memory.
+
 ### Issues
 
 Find a bug? Want more features? Find something missing in the documentation? Let me know! Please don't hesitate to [file an issue](https://github.com/blacktop/docker-elasticsearch-alpine/issues/new)
 
 ### Credits
 
-Heavily (if not entirely) influenced by https://github.com/docker-library/elasticsearch
+Heavily (if not entirely) influenced by https://github.com/docker-library/elasticsearch  
+Production docs from https://stefanprodan.com/2016/elasticsearch-cluster-with-docker/  
 
 ### CHANGELOG
 
