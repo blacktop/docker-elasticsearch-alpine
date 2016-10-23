@@ -41,7 +41,7 @@ Compare Image Sizes:
 
 ```bash
 REPOSITORY               TAG                 SIZE
-blacktop/elasticsearch   latest              141.7 MB
+blacktop/elasticsearch   latest              141.5 MB
 blacktop/elasticsearch   5.0                 151.1 MB
 blacktop/elasticsearch   kopf                147.5 MB
 blacktop/elasticsearch   2.4                 141.5 MB
@@ -49,8 +49,7 @@ blacktop/elasticsearch   2.3                 141.7 MB
 blacktop/elasticsearch   1.7                 145.4 MB
 ```
 
-> **NOTE:** tag **5.0** requires at least 2GB of RAM to run.
-> **NOTE:** tag **kopf** includes the *kopf* plugin.
+> **NOTE:** tag **kopf** includes the *kopf* plugin.  
 
 ### Getting Started
 
