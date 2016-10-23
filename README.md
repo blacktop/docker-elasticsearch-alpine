@@ -17,7 +17,8 @@ Alpine Linux based Elasticsearch Docker Image
     - [Documentation](#documentation)
         - [To increase the HEAP_MAX and HEAP_MIN to 2GB.](#to-increase-the-heap_max-and-heap_min-to-2gb)
         - [To create an elasticsearch cluster](#to-create-an-elasticsearch-cluster)
-        - [To monitor the clusters metrics using dockerbeat:](#to-monitor-the-clusters-metrics-using-dockerbeat)
+        - [To monitor the clusters metrics using dockerbeat](#to-monitor-the-clusters-metrics-using-dockerbeat)
+        - [Run in Production](#run-in-production)
     - [Known Issues](#known-issues)
       - [5.0 failing to start](#50-failing-to-start)
     - [Issues](#issues)
@@ -93,7 +94,7 @@ Now you can:
  - Navigate to: [http://localhost:5601](http://localhost:5601) for [Kibana](https://www.elastic.co/products/kibana)  
  - Navigate to: [http://localhost:9200/_plugin/kopf](http://localhost:9200/_plugin/kopf) for [kopf](https://github.com/lmenezes/elasticsearch-kopf)
 
-##### To monitor the clusters metrics using [dockerbeat](https://github.com/Ingensi/dockerbeat):
+##### To monitor the clusters metrics using [dockerbeat](https://github.com/Ingensi/dockerbeat)
 
 ```bash
 $ curl https://raw.githubusercontent.com/Ingensi/dockerbeat/develop/etc/dockerbeat.template.json \
