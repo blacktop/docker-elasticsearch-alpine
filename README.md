@@ -101,8 +101,6 @@ $ curl https://raw.githubusercontent.com/Ingensi/dockerbeat/develop/etc/dockerbe
 $ docker run -d -v /var/run/docker.sock:/var/run/docker.sock --link elastic:elasticsearch ingensi/dockerbeat
 ```
 
-### Known Issues
-
 ### Issues
 
 Find a bug? Want more features? Find something missing in the documentation? Let me know! Please don't hesitate to [file an issue](https://github.com/blacktop/docker-elasticsearch-alpine/issues/new)
