@@ -46,13 +46,15 @@ RUN apk-install -t build-deps wget ca-certificates \
 COPY config/elastic /usr/share/elasticsearch/config
 COPY config/logrotate /etc/logrotate.d/elasticsearch
 COPY elastic-entrypoint.sh /
+COPY docker-healthcheck /usr/local/bin/
 
+WORKDIR /usr/share/elasticsearch
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
 VOLUME ["/usr/share/elasticsearch/data"]
 
 EXPOSE 9200 9300
-
 ENTRYPOINT ["/elastic-entrypoint.sh"]
-
 CMD ["elasticsearch"]
+
+HEALTHCHECK CMD ["docker-healthcheck"]

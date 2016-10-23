@@ -47,19 +47,15 @@ RUN apk-install -t build-deps wget ca-certificates \
 COPY config/elastic /usr/share/elasticsearch/config
 COPY config/logrotate /etc/logrotate.d/elasticsearch
 COPY elastic-entrypoint.sh /
+COPY docker-healthcheck /usr/local/bin/
 
 WORKDIR /usr/share/elasticsearch
-
 ENV PATH /usr/share/elasticsearch/bin:$PATH
-
-# This is needed for it to run
-# I think it is a bug with the alpha version
-ENV ES_JAVA_OPTS "-Xms2g -Xmx2g"
 
 VOLUME ["/usr/share/elasticsearch/data"]
 
 EXPOSE 9200 9300
-
 ENTRYPOINT ["/elastic-entrypoint.sh"]
-
 CMD ["elasticsearch"]
+
+HEALTHCHECK CMD ["docker-healthcheck"]
