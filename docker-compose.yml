@@ -1,29 +1,65 @@
 version: "2"
 
 services:
+
+  # ELASTICSEARCH MASTER NODE
   master:
     restart: unless-stopped
     image: blacktop/elasticsearch
     command: master
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
     volumes:
       - data:/usr/share/elasticsearch/data
     networks:
       - elastic
+
+  # ELASTICSEARCH CLIENT/INGEST NODE
   client:
     restart: unless-stopped
     image: blacktop/elasticsearch:kopf
     command: client
     ports:
       - "9200:9200"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
     links:
      - master:elastic-master
     networks:
       - elastic
+
+  # ELASTICSEARCH DATA NODE
   data:
     restart: unless-stopped
     image: blacktop/elasticsearch
     environment:
       - ES_HEAP_SIZE=2g
+    mem_limit: 4g
+    memswap_limit: 4g
+    # mem_swappiness: 0
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
     command: data
     links:
      - master:elastic-master
@@ -31,6 +67,8 @@ services:
       - data:/usr/share/elasticsearch/data
     networks:
       - elastic
+
+  # KIBANA NODE
   kibana:
     image: kibana
     ports:
@@ -40,9 +78,10 @@ services:
     networks:
       - elastic
 
+# ELASTICSEARCH DATA VOLUME
 volumes:
   data:
-
+# ELASTICSEARCH BRIDGE NETWORK
 networks:
   elastic:
     driver: bridge
