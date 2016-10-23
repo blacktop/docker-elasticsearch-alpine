@@ -2,11 +2,15 @@ version: "2"
 
 services:
   master:
+    restart: unless-stopped
     image: blacktop/elasticsearch
     command: master
+    volumes:
+      - data:/usr/share/elasticsearch/data
     networks:
       - elastic
   client:
+    restart: unless-stopped
     image: blacktop/elasticsearch:kopf
     command: client
     ports:
@@ -16,12 +20,15 @@ services:
     networks:
       - elastic
   data:
+    restart: unless-stopped
     image: blacktop/elasticsearch
     environment:
-      - ES_JAVA_OPTS=-Xms2g -Xmx2g
+      - ES_HEAP_SIZE=2g
     command: data
     links:
      - master:elastic-master
+    volumes:
+      - data:/usr/share/elasticsearch/data
     networks:
       - elastic
   kibana:
@@ -33,8 +40,8 @@ services:
     networks:
       - elastic
 
-# volumes:
-#   es-data:
+volumes:
+  data:
 
 networks:
   elastic:
