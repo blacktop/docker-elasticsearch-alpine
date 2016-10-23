@@ -73,7 +73,7 @@ $ docker run -d --name elastic -p 9200:9200 -e ES_JAVA_OPTS="-Xms2g -Xmx2g" blac
 
 ```bash
 $ docker run -d --name elastic-master blacktop/elasticsearch master
-$ docker run -d --name elastic-client -p 9200:9200 --link elastic-master blacktop/elasticsearch client
+$ docker run -d --name elastic-client -p 9200:9200 --link elastic-master blacktop/elasticsearch:kopf client
 $ docker run -d --name elastic-data-1 --link elastic-master blacktop/elasticsearch data
 $ docker run -d --name elastic-data-2 --link elastic-master blacktop/elasticsearch data
 $ docker run -d --name elastic-data-3 --link elastic-master blacktop/elasticsearch data
