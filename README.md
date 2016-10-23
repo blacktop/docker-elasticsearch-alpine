@@ -103,12 +103,6 @@ $ docker run -d -v /var/run/docker.sock:/var/run/docker.sock --link elastic:elas
 
 ### Known Issues
 
-#### 5.0 failing to start
-
-In order to use `blacktop/elasticsearch:5.0` you must also supply the environment variable: `ES_JAVA_OPTS="-Xms2g -Xmx2g"` for it to successfully start.  
-
-I am including it by default in the Dockerfile for now.
-
 ### Issues
 
 Find a bug? Want more features? Find something missing in the documentation? Let me know! Please don't hesitate to [file an issue](https://github.com/blacktop/docker-elasticsearch-alpine/issues/new)
