@@ -17,17 +17,6 @@ if [ "$1" = 'elasticsearch' -a "$(id -u)" = '0' ]; then
 	#exec gosu elasticsearch "$BASH_SOURCE" "$@"
 fi
 
-if [ "$1" = 'kopf' -a "$(id -u)" = '0' ]; then
-	# Install kopf plugin
-	plugin install lmenezes/elasticsearch-kopf/v2.1.1
-
-	# Change the ownership of /usr/share/elasticsearch/data to elasticsearch
-	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
-
-	set -- gosu elasticsearch /sbin/tini -- elasticsearch
-	#exec gosu elasticsearch "$BASH_SOURCE" "$@"
-fi
-
 if [ "$1" = 'master' -a "$(id -u)" = '0' ]; then
 	# Change node into a master node
 	echo "node.master: true" >> /usr/share/elasticsearch/config/elasticsearch.yml

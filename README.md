@@ -3,7 +3,7 @@
 docker-elasticsearch-alpine
 ===========================
 
-[![CircleCI](https://circleci.com/gh/blacktop/docker-elasticsearch-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-elasticsearch-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/elasticsearch.svg)](https://hub.docker.com/r/blacktop/elasticsearch/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/elasticsearch.svg)](https://hub.docker.com/r/blacktop/elasticsearch/) [![Docker Image](https://img.shields.io/badge/docker image-141.7 MB-blue.svg)](https://hub.docker.com/r/blacktop/elasticsearch/)
+[![CircleCI](https://circleci.com/gh/blacktop/docker-elasticsearch-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-elasticsearch-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/elasticsearch.svg)](https://hub.docker.com/r/blacktop/elasticsearch/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/elasticsearch.svg)](https://hub.docker.com/r/blacktop/elasticsearch/) [![Docker Image](https://img.shields.io/badge/docker image-141.5 MB-blue.svg)](https://hub.docker.com/r/blacktop/elasticsearch/)
 
 Alpine Linux based Elasticsearch Docker Image
 
@@ -44,12 +44,14 @@ Compare Image Sizes:
 REPOSITORY               TAG                 SIZE
 blacktop/elasticsearch   latest              141.7 MB
 blacktop/elasticsearch   5.0                 145.7 MB
+blacktop/elasticsearch   kopf                141.5 MB
 blacktop/elasticsearch   2.4                 141.5 MB
 blacktop/elasticsearch   2.3                 141.7 MB
 blacktop/elasticsearch   1.7                 145.4 MB
 ```
 
 > **NOTE:** tag **5.0** requires at least 2GB of RAM to run.
+> **NOTE:** tag **kopf** includes the *kopf* plugin.
 
 ### Getting Started
 

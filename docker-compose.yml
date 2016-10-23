@@ -7,7 +7,7 @@ services:
     networks:
       - elastic
   client:
-    image: blacktop/elasticsearch
+    image: blacktop/elasticsearch:kopf
     command: client
     ports:
       - "9200:9200"
