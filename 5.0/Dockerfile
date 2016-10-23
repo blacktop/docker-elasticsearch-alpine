@@ -26,7 +26,7 @@ ENV ELASTIC 5.0.0-rc1
 RUN apk-install bash
 RUN apk-install -t build-deps wget ca-certificates \
   && cd /tmp \
-  && wget -O elasticsearch-$ELASTIC.tar.gz https://artifacts.elastic.co/downloads/elasticsearch/$ELASTIC.tar.gz \
+  && wget -O elasticsearch-$ELASTIC.tar.gz https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ELASTIC.tar.gz \
   && tar -xzf elasticsearch-$ELASTIC.tar.gz \
   && mv elasticsearch-$ELASTIC /usr/share/elasticsearch \
   && adduser -DH -s /sbin/nologin elasticsearch \
