@@ -18,6 +18,8 @@ $ docker-compose up -d
 $ docker-compose scale data=3
 ```
 
+> **NOTE:** docker-compose.yml assumes you have more than 4GB of RAM available.  
+
 Now you can:  
  - Navigate to: [http://localhost:5601](http://localhost:5601) for [Kibana](https://www.elastic.co/products/kibana)  
  - Navigate to: [http://localhost:9200/_plugin/kopf](http://localhost:9200/_plugin/kopf) for [kopf](https://github.com/lmenezes/elasticsearch-kopf)  
