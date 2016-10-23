@@ -19,8 +19,6 @@ Alpine Linux based Elasticsearch Docker Image
         - [To create an elasticsearch cluster](#to-create-an-elasticsearch-cluster)
         - [To monitor the clusters metrics using dockerbeat](#to-monitor-the-clusters-metrics-using-dockerbeat)
         - [Run in Production](#run-in-production)
-    - [Known Issues](#known-issues)
-      - [5.0 failing to start](#50-failing-to-start)
     - [Issues](#issues)
     - [Credits](#credits)
     - [CHANGELOG](#changelog)
