@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/blacktop/docker-elasticsearch-alpine/master/es-logo.svg" alt="kibana-logo" width="200" height="200">
+<img src="https://cdn.rawgit.com/blacktop/docker-elasticsearch-alpine/master/es-logo.svg" alt="es-logo" width="200" height="200">
 
 docker-elasticsearch-alpine
 ===========================
