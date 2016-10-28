@@ -1,4 +1,4 @@
-<img src="https://cdn.rawgit.com/blacktop/docker-elasticsearch-alpine/master/es-logo.svg" alt="es-logo" width="200" height="200">
+![es-logo](https://raw.githubusercontent.com/blacktop/docker-elasticsearch-alpine/master/es-logo.png)
 
 docker-elasticsearch-alpine
 ===========================
