@@ -15,10 +15,10 @@ services:
   ####################################
   # ELASTICSEARCH CLIENT/INGEST NODE #
   ####################################
-  client:
+  ingest:
     restart: unless-stopped
-    image: blacktop/elasticsearch:kopf
-    command: client
+    image: blacktop/elasticsearch
+    command: ingest
     ports:
       - "9200:9200"
     links:
@@ -44,11 +44,11 @@ services:
   # KIBANA NODE #
   ###############
   kibana:
-    image: kibana
+    image: blacktop/kibana
     ports:
       - "80:5601"
     links:
-     - client:elasticsearch
+     - ingest:elasticsearch
     networks:
       - elastic
 #############################
