@@ -50,6 +50,7 @@ services:
     restart: unless-stopped
     image: blacktop/elasticsearch
     environment:
+      - ES_JAVA_OPTS=-Xms2g -Xmx2g
       - ES_HEAP_SIZE=2g
     mem_limit: 4g
     memswap_limit: 4g
@@ -86,7 +87,7 @@ services:
 #############################
 volumes:
   data:
-################################    
+################################
 # ELASTICSEARCH BRIDGE NETWORK #
 ################################
 networks:

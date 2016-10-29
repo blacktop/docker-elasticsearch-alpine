@@ -30,8 +30,8 @@ if [ "$1" = 'master' -a "$(id -u)" = '0' ]; then
 	#exec gosu elasticsearch "$BASH_SOURCE" "$@"
 fi
 
-if [ "$1" = 'client' -a "$(id -u)" = '0' ]; then
-	# Change node into a client node
+if [ "$1" = 'ingest' -a "$(id -u)" = '0' ]; then
+	# Change node into a ingest node
 	echo "node.master: false" >> /usr/share/elasticsearch/config/elasticsearch.yml
 	echo "node.ingest: true" >> /usr/share/elasticsearch/config/elasticsearch.yml
 	echo "node.data: false" >> /usr/share/elasticsearch/config/elasticsearch.yml
