@@ -6,7 +6,7 @@ services:
   #############################
   master:
     restart: unless-stopped
-    image: blacktop/elasticsearch
+    image: blacktop/elasticsearch:x-pack
     command: master
     volumes:
       - data:/usr/share/elasticsearch/data
@@ -17,7 +17,7 @@ services:
   ####################################
   ingest:
     restart: unless-stopped
-    image: blacktop/elasticsearch
+    image: blacktop/elasticsearch:x-pack
     command: ingest
     ports:
       - "9200:9200"
@@ -30,7 +30,7 @@ services:
   ###########################
   data:
     restart: unless-stopped
-    image: blacktop/elasticsearch
+    image: blacktop/elasticsearch:x-pack
     environment:
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
       - ES_HEAP_SIZE=2g
@@ -45,7 +45,7 @@ services:
   # KIBANA NODE #
   ###############
   kibana:
-    image: blacktop/kibana
+    image: blacktop/kibana:x-pack
     ports:
       - "80:5601"
     links:
