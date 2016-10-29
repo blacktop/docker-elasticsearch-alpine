@@ -15,7 +15,7 @@ Alpine Linux based Elasticsearch Docker Image
   - [Getting Started](#getting-started)
   - [Documentation](#documentation)
       - [To create an elasticsearch cluster](docs/create.md)
-      - [To increase the ES_HEAP_SIZE to 2GB](docs/options.md)        
+      - [To increase the HEAP_SIZE to 2GB](docs/options.md)        
       - [To monitor the clusters metrics using dockerbeat](docs/dockerbeat.md)
       - [To run in production](docs/production.md)
   - [Issues](#issues)
@@ -61,7 +61,7 @@ $ docker run -d --name elastic -p 9200:9200 blacktop/elasticsearch
 ### Documentation
 
  * [To create an elasticsearch cluster](docs/create.md)
- * [To increase the ES_HEAP_SIZE to 2GB](docs/options.md)
+ * [To increase the HEAP_SIZE to 2GB](docs/options.md)
  * [To monitor the clusters metrics using dockerbeat](docs/dockerbeat.md)
  * [To run in production](docs/production.md)
 
