@@ -16,7 +16,7 @@ dependencies:
 
 test:
   override:
-    - docker run -d --name es -p 9200:9200 blacktop_elasticsearch -Ebootstrap.ignore_system_bootstrap_checks=true; sleep 10
+    - docker run -d --name es -p 9200:9200 blacktop_elasticsearch -Ebootstrap.mlockall=true; sleep 10
     - docker logs es
     - curl --retry 10 --retry-delay 5 -v http://localhost:9200
 
