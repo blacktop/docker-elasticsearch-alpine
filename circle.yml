@@ -16,7 +16,8 @@ dependencies:
 
 test:
   override:
-    - docker run -d -p 9200:9200 blacktop_elasticsearch; sleep 10
+    - docker run -d --name es -p 9200:9200 blacktop_elasticsearch; sleep 10
+    - docker logs es
     - curl --retry 10 --retry-delay 5 -v http://localhost:9200
 
 deployment:
