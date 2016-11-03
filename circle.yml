@@ -18,7 +18,7 @@ test:
   override:
     - docker run -d --name es -p 9200:9200 -e ES_JAVA_OPTS="-Xms1g -Xmx1g" blacktop_elasticsearch; sleep 10
     - docker logs es
-    - curl --retry 10 --retry-delay 5 -v http://localhost:9200
+    # - curl --retry 10 --retry-delay 5 -v http://localhost:9200
 
 deployment:
   # master:
