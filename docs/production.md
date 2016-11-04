@@ -6,7 +6,12 @@ On Ubuntu you have to edit `/etc/default/grub` and add this line:
 GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"
 ```
 
-Then run `sudo update-grub` and `sudo reboot`.
+Then run
+```bash
+sudo sysctl -w vm.max_map_count=262144
+sudo update-grub
+sudo reboot
+```
 
 ```bash
 $ docker run -d -p 9200:9200 \
