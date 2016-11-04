@@ -65,9 +65,9 @@ $ docker run -d --name elastic -p 9200:9200 blacktop/elasticsearch
  * [To monitor the clusters metrics using dockerbeat](docs/dockerbeat.md)
  * [To run in production](docs/production.md)
 
-### Known Issues  
+### Known Issues :warning:  
 
-I have noticed when running on a linux host you need to increase the memory map areas with the following command  
+I have noticed when running the new **5.0** version on a linux host you need to increase the memory map areas with the following command  
 
 ```bash
 sudo sysctl -w vm.max_map_count=262144
