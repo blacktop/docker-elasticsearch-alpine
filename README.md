@@ -42,6 +42,7 @@ Compare Image Sizes:
 REPOSITORY               TAG                 SIZE
 blacktop/elasticsearch   latest              149.7 MB
 blacktop/elasticsearch   5.0                 149.7 MB
+blacktop/elasticsearch   geoip               182.7 MB
 blacktop/elasticsearch   x-pack              167.1 MB
 blacktop/elasticsearch   2.4                 140.1 MB
 blacktop/elasticsearch   kopf                147.5 MB
@@ -50,6 +51,7 @@ blacktop/elasticsearch   1.7                 145.4 MB
 ```
 
 > **NOTE:** tag **x-pack** is the same as tag **latest**, but includes the *x-pack* plugin.   
+> **NOTE:** tag **geoip** is the same as tag **latest**, but includes the *ingest-geoip* and the *ingest-user-agent* plugin.   
 > **NOTE:** tag **kopf** is the same as tag **2.4**, but includes the *kopf* plugin.  
 
 ### Getting Started
@@ -72,7 +74,6 @@ I have noticed when running the new **5.0** version on a linux host you need to 
 ```bash
 sudo sysctl -w vm.max_map_count=262144
 ```
-
 
 ### Issues
 
