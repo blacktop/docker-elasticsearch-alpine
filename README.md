@@ -50,9 +50,10 @@ blacktop/elasticsearch   2.3                 141.8 MB
 blacktop/elasticsearch   1.7                 145.4 MB
 ```
 
-> **NOTE:** tag **x-pack** is the same as tag **latest**, but includes the *x-pack*, the *ingest-geoip* and the *ingest-user-agent* plugin.  
-> **NOTE:** tag **geoip** is the same as tag **latest**, but includes the *ingest-geoip* and the *ingest-user-agent* plugin.  
-> **NOTE:** tag **kopf** is the same as tag **2.4**, but includes the *kopf* plugin.
+> **NOTE:**
+ * tag **x-pack** is the same as tag **latest**, but includes the *x-pack*, the *ingest-geoip* and the *ingest-user-agent* plugin.  
+ * tag **geoip** is the same as tag **latest**, but includes the *ingest-geoip* and the *ingest-user-agent* plugin.  
+ * tag **kopf** is the same as tag **2.4**, but includes the *kopf* plugin.
 
 ### Getting Started
 
