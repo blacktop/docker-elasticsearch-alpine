@@ -15,11 +15,9 @@ $ docker run -d -p 9200:9200 \
                 --name elastic \
                 --cap-add=IPC_LOCK --ulimit nofile=65536:65536 --ulimit memlock=-1:-1 \
                 --memory="4g" --memory-swap="4g" --memory-swappiness=0 \
-                -e ES_HEAP_SIZE="2g" \
-                blacktop/elasticsearch:kopf \
-                -Des.bootstrap.mlockall=true \
-                -Des.network.host=_eth0_ \
-                -Des.discovery.zen.ping.multicast.enabled=false
+                -e ES_JAVA_OPTS="-Xms2g -Xmx2g" \
+                blacktop/elasticsearch \
+                -Ebootstrap.memory_lock=true
 ```
 
 > **NOTE:** This will limit the container memory to 4GB and the ES heap size to 2GB.  This also will prevent the container from being able to swap its memory.
