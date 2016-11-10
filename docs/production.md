@@ -3,9 +3,9 @@
 On Ubuntu:
 
 ```bash
-sudo echo "vm.max_map_count=262144" >> /etc/sysctl.conf
+echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
 sudo sysctl -w vm.max_map_count=262144
-sudo echo 'GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"' >> /etc/default/grub
+echo 'GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"' | sudo tee -a /etc/default/grub
 sudo update-grub
 sudo reboot
 ```
