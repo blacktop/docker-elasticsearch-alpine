@@ -1,14 +1,11 @@
 ## To run in production  
 
-On Ubuntu you have to edit `/etc/default/grub` and add this line:
+On Ubuntu:
 
-```
-GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"
-```
-
-Then run
 ```bash
+sudo echo "vm.max_map_count=262144" >> /etc/sysctl.conf
 sudo sysctl -w vm.max_map_count=262144
+sudo echo 'GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"' >> /etc/default/grub
 sudo update-grub
 sudo reboot
 ```
