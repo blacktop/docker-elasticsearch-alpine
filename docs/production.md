@@ -10,6 +10,8 @@ sudo update-grub
 sudo reboot
 ```
 
+> **NOTE:** This increases the virtual memory maps as well as allows docker to disable memory swappiness.
+
 ```bash
 $ docker run -d -p 9200:9200 \
                 --name elastic \
@@ -20,4 +22,4 @@ $ docker run -d -p 9200:9200 \
                 -Ebootstrap.memory_lock=true
 ```
 
-> **NOTE:** This will limit the container memory to 4GB and the ES heap size to 2GB.  This also will prevent the container from being able to swap its memory.
+> **NOTE:** This will limit the container memory to 4GB and the ES heap size to 2GB as well as allow ES to lock the memory.  
