@@ -21,7 +21,7 @@ RUN apk-install -t build-deps wget ca-certificates gpgme \
 	&& gosu nobody true \
   && apk del --purge build-deps
 
-ENV ELASTIC 2.4.1
+ENV ELASTIC 2.4.2
 
 RUN apk-install -t build-deps wget ca-certificates \
   && cd /tmp \
@@ -49,7 +49,7 @@ COPY elastic-entrypoint.sh /
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
-# Install kopf plugin  
+# Install kopf plugin
 RUN plugin install lmenezes/elasticsearch-kopf/v2.1.2
 
 VOLUME ["/usr/share/elasticsearch/data"]
