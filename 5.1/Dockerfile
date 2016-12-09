@@ -53,12 +53,6 @@ WORKDIR /usr/share/elasticsearch
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
-# Install X-Pack plugin
-RUN elasticsearch-plugin install -b x-pack
-# Install geoip/user-agent plugin
-RUN elasticsearch-plugin install -b ingest-geoip
-RUN elasticsearch-plugin install -b ingest-user-agent
-
 VOLUME ["/usr/share/elasticsearch/data"]
 
 EXPOSE 9200 9300
