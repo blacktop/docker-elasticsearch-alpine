@@ -43,12 +43,12 @@ REPOSITORY               TAG                 SIZE
 blacktop/elasticsearch   latest              148.8 MB
 blacktop/elasticsearch   5.1                 148.8 MB 
 blacktop/elasticsearch   5.0                 148.4 MB
-blacktop/elasticsearch   geoip               182.7 MB
-blacktop/elasticsearch   x-pack              200.0 MB
-blacktop/elasticsearch   2.4                 140.1 MB
-blacktop/elasticsearch   kopf                147.5 MB
-blacktop/elasticsearch   2.3                 141.8 MB
-blacktop/elasticsearch   1.7                 145.4 MB
+blacktop/elasticsearch   geoip               181.8 MB
+blacktop/elasticsearch   x-pack              199.1 MB
+blacktop/elasticsearch   2.4                 138.8 MB
+blacktop/elasticsearch   kopf                142.7 MB
+blacktop/elasticsearch   2.3                 139.1 MB
+blacktop/elasticsearch   1.7                 142.7 MB
 ```
 
 > **NOTE:**
