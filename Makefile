@@ -10,6 +10,7 @@ build:
 size: build
 ifeq "$(BUILD)" "$(LATEST)"
 	sed -i.bu 's/docker image-.*-blue/docker image-$(NEWSIZE)-blue/' README.md
+	sed -i.bu '/latest/ s/[0-9.]\{3,5\} MB/$(NEWSIZE)/' README.md	
 endif
 	sed -i.bu '/$(BUILD)/ s/[0-9.]\{3,5\} MB/$(NEWSIZE)/' README.md
 
