@@ -9,7 +9,6 @@ Alpine Linux based [Elasticsearch](https://www.elastic.co/products/elasticsearch
 
 **Table of Contents**
 
--	[Why?](#why)
 -	[Dependencies](#dependencies)
 -	[Image Tags](#image-tags)
 -	[Getting Started](#getting-started)
