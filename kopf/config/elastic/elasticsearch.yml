@@ -4,3 +4,7 @@ network.host: 0.0.0.0
 # be sure to modify it appropriately for a production cluster deployment
 discovery.zen.minimum_master_nodes: 1
 bootstrap.ignore_system_bootstrap_checks: true
+
+node.master: true
+node.client: true
+node.data: true

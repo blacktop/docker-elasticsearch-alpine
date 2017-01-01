@@ -45,20 +45,20 @@ RUN apk-install -t .build-deps wget ca-certificates gnupg openssl \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
-COPY config/elastic /usr/share/elasticsearch/config
-COPY config/logrotate /etc/logrotate.d/elasticsearch
-COPY elastic-entrypoint.sh /
-COPY docker-healthcheck /usr/local/bin/
+ENV PATH /usr/share/elasticsearch/bin:$PATH
 
 WORKDIR /usr/share/elasticsearch
-
-ENV PATH /usr/share/elasticsearch/bin:$PATH
 
 # Install X-Pack plugin
 RUN elasticsearch-plugin install -b x-pack
 # Install geoip/user-agent plugin
 RUN elasticsearch-plugin install -b ingest-geoip
 RUN elasticsearch-plugin install -b ingest-user-agent
+
+COPY config/elastic /usr/share/elasticsearch/config
+COPY config/logrotate /etc/logrotate.d/elasticsearch
+COPY elastic-entrypoint.sh /
+COPY docker-healthcheck /usr/local/bin/
 
 VOLUME ["/usr/share/elasticsearch/data"]
 
