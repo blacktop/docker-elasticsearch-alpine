@@ -24,14 +24,6 @@ Alpine Linux based [Elasticsearch](https://www.elastic.co/products/elasticsearch
 -	[Contributing](#contributing)
 -	[License](#license)
 
-### Why?
-
-Compare Image Sizes:  
- - official elasticsearch = 350 MB  
- - blacktop/elasticsearch = 149 MB
-
-**Alpine version is 201 MB smaller !**
-
 ### Dependencies
 
 -	[gliderlabs/alpine:3.4](https://index.docker.io/_/gliderlabs/alpine/)
@@ -41,7 +33,7 @@ Compare Image Sizes:
 ```bash
 REPOSITORY               TAG                 SIZE
 blacktop/elasticsearch   latest              149.3 MB
-blacktop/elasticsearch   5.1                 149.3 MB 
+blacktop/elasticsearch   5.1                 149.3 MB
 blacktop/elasticsearch   5.0                 148.4 MB
 blacktop/elasticsearch   geoip               181.8 MB
 blacktop/elasticsearch   x-pack              199.5 MB
