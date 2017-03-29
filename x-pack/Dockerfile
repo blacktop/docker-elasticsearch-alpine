@@ -4,12 +4,12 @@ MAINTAINER blacktop, https://github.com/blacktop
 
 RUN apk-install openjdk8-jre tini su-exec
 
-ENV ES_VERSION 5.2.0
+ENV ES_VERSION 5.3.0
 
 ENV ELASTICSEARCH_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 ENV ES_TARBAL "${ELASTICSEARCH_URL}/elasticsearch-${ES_VERSION}.tar.gz"
 ENV ES_TARBALL_ASC "${ELASTICSEARCH_URL}/elasticsearch-${ES_VERSION}.tar.gz.asc"
-ENV ES_TARBALL_SHA1 "7351cd29ac9c20592d94bde950f513b5c5bb44d3"
+ENV ES_TARBALL_SHA1 "9273fdecb2251755887f1234d6cfcc91e44a384d"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk-install bash

@@ -9,13 +9,13 @@ ENV ES_VERSION 5.3.0
 ENV ELASTICSEARCH_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 ENV ES_TARBAL "${ELASTICSEARCH_URL}/elasticsearch-${ES_VERSION}.tar.gz"
 ENV ES_TARBALL_ASC "${ELASTICSEARCH_URL}/elasticsearch-${ES_VERSION}.tar.gz.asc"
-ENV	ES_TARBALL_SHA1 "9273fdecb2251755887f1234d6cfcc91e44a384d"
-ENV GPG_KEY 46095ACC8548582C1A2699A9D27D666CD88E42B4
+ENV ES_TARBALL_SHA1 "9273fdecb2251755887f1234d6cfcc91e44a384d"
+ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk-install bash
 RUN apk-install -t .build-deps wget ca-certificates gnupg openssl \
   && cd /tmp \
-  && echo "===>Install Elasticsearch..." \
+  && echo "===> Install Elasticsearch..." \
   && wget -O elasticsearch.tar.gz "$ES_TARBAL"; \
 	if [ "$ES_TARBALL_SHA1" ]; then \
 		echo "$ES_TARBALL_SHA1 *elasticsearch.tar.gz" | sha1sum -c -; \
@@ -31,7 +31,7 @@ RUN apk-install -t .build-deps wget ca-certificates gnupg openssl \
   && ls -lah \
   && mv elasticsearch-$ES_VERSION /usr/share/elasticsearch \
   && adduser -DH -s /sbin/nologin elasticsearch \
-  && echo "===>Creating Elasticsearch Paths..." \
+  && echo "===> Creating Elasticsearch Paths..." \
   && for path in \
   	/usr/share/elasticsearch/data \
   	/usr/share/elasticsearch/logs \
@@ -53,10 +53,6 @@ COPY docker-healthcheck /usr/local/bin/
 WORKDIR /usr/share/elasticsearch
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
-
-# Install geoip/user-agent plugin
-RUN elasticsearch-plugin install -b ingest-geoip
-RUN elasticsearch-plugin install -b ingest-user-agent
 
 VOLUME ["/usr/share/elasticsearch/data"]
 
