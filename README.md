@@ -45,8 +45,8 @@ blacktop/elasticsearch   geoip               156 MB
 blacktop/elasticsearch   5.2                 150 MB
 blacktop/elasticsearch   5.1                 149 MB
 blacktop/elasticsearch   5.0                 148.4 MB
-blacktop/elasticsearch   2.4                 138.8 MB
-blacktop/elasticsearch   kopf                144.7 MB
+blacktop/elasticsearch   2.4                 116 MB
+blacktop/elasticsearch   kopf                122 MB
 blacktop/elasticsearch   2.3                 139.1 MB
 blacktop/elasticsearch   1.7                 142.7 MB
 ```
