@@ -23,9 +23,16 @@ Alpine Linux based [Elasticsearch](https://www.elastic.co/products/elasticsearch
 -	[Contributing](#contributing)
 -	[License](#license)
 
+### Why?
+
+Compare Image Sizes:  
+ - official elasticsearch = 206 MB - blacktop/elasticsearch = 123 MB
+
+**Alpine version is 83 MB smaller !**
+
 ### Dependencies
 
--	[gliderlabs/alpine:3.4](https://index.docker.io/_/gliderlabs/alpine/)
+-	[alpine:3.5](https://index.docker.io/_/gliderlabs/alpine/)
 
 ### Image Tags
 
@@ -63,7 +70,7 @@ $ docker run -d --name elastic -p 9200:9200 blacktop/elasticsearch
 
 ### Known Issues :warning:
 
-I have noticed when running the new **5.0** version on a linux host you need to increase the memory map areas with the following command
+I have noticed when running the new **5.0+** version on a linux host you need to increase the memory map areas with the following command
 
 ```bash
 sudo sysctl -w vm.max_map_count=262144
