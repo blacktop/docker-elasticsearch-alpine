@@ -28,7 +28,7 @@ Alpine Linux based [Elasticsearch](https://www.elastic.co/products/elasticsearch
 Compare Image Sizes:  
  - official elasticsearch = 206 MB - blacktop/elasticsearch = 123 MB
 
-**Alpine version is 83 MB smaller !**
+**blacktop version is 83 MB smaller !**
 
 ### Dependencies
 
