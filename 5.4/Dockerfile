@@ -32,7 +32,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   tar -xf elasticsearch.tar.gz \
   && ls -lah \
   && mv elasticsearch-$ES_VERSION /usr/share/elasticsearch \
-  && adduser -DH -s /sbin/nologin elasticsearch \
+  && adduser -D -h /usr/share/elasticsearch elasticsearch \
   && echo "===> Creating Elasticsearch Paths..." \
   && for path in \
   	/usr/share/elasticsearch/data \
@@ -47,18 +47,14 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
-ENV PATH /usr/share/elasticsearch/bin:$PATH
-
-WORKDIR /usr/share/elasticsearch
-
-# Install geoip/user-agent plugin
-RUN elasticsearch-plugin install -b ingest-geoip
-RUN elasticsearch-plugin install -b ingest-user-agent
-
 COPY config/elastic /usr/share/elasticsearch/config
 COPY config/logrotate /etc/logrotate.d/elasticsearch
 COPY elastic-entrypoint.sh /
 COPY docker-healthcheck /usr/local/bin/
+
+WORKDIR /usr/share/elasticsearch
+
+ENV PATH /usr/share/elasticsearch/bin:$PATH
 
 VOLUME ["/usr/share/elasticsearch/data"]
 
