@@ -24,4 +24,7 @@ test:
 	http localhost:9200 | jq .cluster_name
 	docker rm -f esatest
 
-.PHONY: build size tags test
+run:
+	docker run -d --name esrun -p 9200:9200 -e cluster.name=devcluster $(REPO)/$(NAME):$(BUILD)
+
+.PHONY: build size tags test run
