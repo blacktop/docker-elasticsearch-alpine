@@ -3,7 +3,7 @@ machine:
     - docker
 
 general:
-  build_dir: "5.3"
+  build_dir: "5.5"
 
 dependencies:
   cache_directories:
@@ -12,6 +12,7 @@ dependencies:
     - docker info
     - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
     - docker build -t blacktop_elasticsearch .
+    - docker images blacktop_elasticsearch
     - mkdir -p ~/docker; docker save blacktop_elasticsearch > ~/docker/image.tar
 
 test:

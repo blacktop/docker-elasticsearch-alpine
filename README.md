@@ -32,7 +32,7 @@ Compare Image Sizes:
 
 ### Dependencies
 
--	[alpine:3.5](https://index.docker.io/_/gliderlabs/alpine/)
+-	[alpine:3.6](https://index.docker.io/_/gliderlabs/alpine/)
 
 ### Image Tags
 
@@ -40,6 +40,7 @@ Compare Image Sizes:
 REPOSITORY               TAG                 SIZE
 blacktop/elasticsearch   latest              123MB
 blacktop/elasticsearch   6.0                 117MB
+blacktop/elasticsearch   5.5                 123MB
 blacktop/elasticsearch   5.4                 123MB
 blacktop/elasticsearch   5.3                 123MB
 blacktop/elasticsearch   x-pack              249MB
