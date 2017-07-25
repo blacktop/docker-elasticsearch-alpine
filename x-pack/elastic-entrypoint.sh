@@ -34,9 +34,10 @@ if [ "$1" = 'master' -a "$(id -u)" = '0' ]; then
 	sed -ri "s!^(\#\s*)?(node\.data:).*!\2 'false'!" $CONFIG
 
 	# Change the ownership of user-mutable directories to elasticsearch
-	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
+  chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs
-
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/plugins
 	set -- su-exec elasticsearch "$@" ${es_opts}
 fi
 
@@ -55,8 +56,10 @@ if [ "$1" = 'ingest' -a "$(id -u)" = '0' ]; then
 	fi
 
 	# Change the ownership of user-mutable directories to elasticsearch
-	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
+  chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/plugins
 
 	set -- su-exec elasticsearch "$@" ${es_opts}
 fi
@@ -76,8 +79,10 @@ if [ "$1" = 'data' -a "$(id -u)" = '0' ]; then
 	fi
 
 	# Change the ownership of user-mutable directories to elasticsearch
-	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
+  chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/plugins
 
 	set -- su-exec elasticsearch "$@" ${es_opts}
 
@@ -89,6 +94,8 @@ if [ "$1" = 'elasticsearch' -a "$(id -u)" = '0' ]; then
 	# Change the ownership of user-mutable directories to elasticsearch
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/plugins
 
 	set -- su-exec elasticsearch "$@" ${es_opts}
 fi

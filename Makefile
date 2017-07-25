@@ -18,6 +18,9 @@ endif
 tags:
 	docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}" $(REPO)/$(NAME)
 
+ssh:
+	@docker run -it --rm -p 9200:9200 $(REPO)/$(NAME):$(BUILD) bash
+
 test:
 	docker run -d --name esatest -p 9200:9200 -e cluster.name=testcluster $(REPO)/$(NAME):$(BUILD); sleep 10;
 	docker logs esatest
