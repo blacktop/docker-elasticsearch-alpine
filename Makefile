@@ -1,3 +1,5 @@
+.PHONY: build size tags test run
+
 REPO=blacktop
 NAME=elasticsearch
 BUILD ?= 5.5
@@ -21,13 +23,11 @@ tags:
 ssh:
 	@docker run -it --rm -p 9200:9200 $(REPO)/$(NAME):$(BUILD) bash
 
+run:
+	@docker run -d --name elasticsearch -p 9200:9200 $(REPO)/$(NAME):$(BUILD)
+
 test:
 	docker run -d --name esatest -p 9200:9200 -e cluster.name=testcluster $(REPO)/$(NAME):$(BUILD); sleep 10;
 	docker logs esatest
 	http localhost:9200 | jq .cluster_name
 	docker rm -f esatest
-
-run:
-	docker run -d --name esrun -p 9200:9200 -e cluster.name=devcluster $(REPO)/$(NAME):$(BUILD)
-
-.PHONY: build size tags test run
