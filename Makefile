@@ -28,17 +28,17 @@ test: ## Test docker image
 	docker rm -f esatest
 
 tar: ## Export tar of docker image
-	docker save $(ORG)/$(NAME):$(VERSION) -o $(NAME).tar
+	docker save $(ORG)/$(NAME):$(BUILD) -o $(NAME).tar
 
 push: build ## Push docker image to docker registry
-	@echo "===> Pushing $(ORG)/$(NAME):$(VERSION) to docker hub..."
-	@docker push $(ORG)/$(NAME):$(VERSION)
+	@echo "===> Pushing $(ORG)/$(NAME):$(BUILD) to docker hub..."
+	@docker push $(ORG)/$(NAME):$(BUILD)
 
 run: stop ## Run docker container
-	@docker run --init -d --name $(NAME) -p 9200:9200 $(ORG)/$(NAME):$(VERSION)
+	@docker run --init -d --name $(NAME) -p 9200:9200 $(ORG)/$(NAME):$(BUILD)
 
 ssh: ## SSH into docker image
-	@docker run --init -it --rm --entrypoint=sh $(ORG)/$(NAME):$(VERSION)
+	@docker run --init -it --rm --entrypoint=sh $(ORG)/$(NAME):$(BUILD)
 
 stop: ## Kill running malice-engine docker containers
 	@docker rm -f $(NAME) || true
@@ -57,7 +57,7 @@ ci-size: ci-build
 
 clean: ## Clean docker image and stop all running containers
 	docker-clean stop
-	docker rmi $(ORG)/$(NAME):$(VERSION) || true
+	docker rmi $(ORG)/$(NAME):$(BUILD) || true
 	rm -rf malice/build
 
 # Absolutely awesome: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html

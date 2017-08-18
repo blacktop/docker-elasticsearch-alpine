@@ -54,7 +54,7 @@ jobs:
           name: Run test
           command: |
             set -x
-            docker run --rm --network container:es blacktop/httpie http://localhost:9200
+            docker run --rm --network container:es blacktop/httpie GET http://localhost:9200
 
       # - deploy:
       #     name: Push application Docker image
