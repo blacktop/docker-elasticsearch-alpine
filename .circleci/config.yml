@@ -45,12 +45,16 @@ jobs:
           paths:
             - /caches/app.tar
       - run:
-          name: Run test
+          name: Run elasticsearch
           command: |
             set -x
             docker run -d --name es -p 9200:9200 -e cluster.name=testcluster -e discovery.type=single-node app; sleep 10;
             docker logs es
-            docker run --rm --network container:es blacktop/httpie es:9200 | jq .cluster_name
+      - run:
+          name: Run test
+          command: |
+            set -x
+            docker run --rm --network container:es blacktop/httpie localhost:9200 | jq .cluster_name
 
       # - deploy:
       #     name: Push application Docker image
