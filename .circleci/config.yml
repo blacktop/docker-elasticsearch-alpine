@@ -53,7 +53,7 @@ jobs:
           name: Run malware test
           command: |
             set -x
-            docker run -d --name etest -p 9200:9200 -e cluster.name=testcluster -e ES_JAVA_OPTS="-Xms1g -Xmx1g" app; sleep 10;
+            docker run -d --name etest -p 9200:9200 -e cluster.name=testcluster -e ES_JAVA_OPTS="-Xms1g -Xmx1g" app -Ebootstrap.system_call_filter=false; sleep 10;
             docker logs etest
             http localhost:9200 | jq .cluster_name
 
