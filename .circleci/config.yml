@@ -53,8 +53,8 @@ jobs:
           name: Run test
           command: |
             set -x
-            docker run -d --name etest -p 9200:9200 -e cluster.name=testcluster -e discovery.type=single-node app; sleep 10;
-            docker logs etest
+            docker run -d --name etest -p 9200:9200 -e cluster.name=testcluster -e discovery.type=single-node app
+            sleep 20; docker logs etest
             http localhost:9200 | jq .cluster_name
 
       # - deploy:
