@@ -48,9 +48,9 @@ jobs:
           name: Run test
           command: |
             set -x
-            docker run -d --name etest -p 9200:9200 -e cluster.name=testcluster -e discovery.type=single-node app; sleep 10;
+            docker run -d --name es -p 9200:9200 -e cluster.name=testcluster -e discovery.type=single-node app; sleep 10;
             docker logs etest
-            docker run --rm --link etest:elasticsearch blacktop/httpie localhost:9200 | jq .cluster_name
+            docker run --rm --network container:es blacktop/httpie es:9200 | jq .cluster_name
 
       # - deploy:
       #     name: Push application Docker image
