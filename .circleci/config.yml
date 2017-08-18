@@ -50,10 +50,10 @@ jobs:
           paths:
             - /caches/app.tar
       - run:
-          name: Run malware test
+          name: Run test
           command: |
             set -x
-            docker run -d --name etest -p 9200:9200 -e cluster.name=testcluster -e es.enforce.bootstrap.checks=false app; sleep 10;
+            docker run -d --name etest -p 9200:9200 -e cluster.name=testcluster app -Des.enforce.bootstrap.checks=true; sleep 10;
             docker logs etest
             http localhost:9200 | jq .cluster_name
 
