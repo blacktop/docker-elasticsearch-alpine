@@ -49,7 +49,7 @@ jobs:
           command: |
             set -x
             docker run -d --name es -p 9200:9200 -e cluster.name=testcluster -e discovery.type=single-node app; sleep 10;
-            docker logs etest
+            docker logs es
             docker run --rm --network container:es blacktop/httpie es:9200 | jq .cluster_name
 
       # - deploy:
