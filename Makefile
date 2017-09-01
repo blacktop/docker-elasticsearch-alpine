@@ -22,10 +22,10 @@ tags:
 	docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}" $(ORG)/$(NAME)
 
 test: ## Test docker image
-	docker run -d --name esatest -p 9200:9200 -e cluster.name=testcluster $(REPO)/$(NAME):$(BUILD); sleep 10;
-	docker logs esatest
+	docker run -d --name $(NAME) -p 9200:9200 -e cluster.name=testcluster $(ORG)/$(NAME):$(BUILD); sleep 15;
+	docker logs $(NAME)
 	http localhost:9200 | jq .cluster_name
-	docker rm -f esatest
+	docker rm -f $(NAME)
 
 tar: ## Export tar of docker image
 	docker save $(ORG)/$(NAME):$(BUILD) -o $(NAME).tar
@@ -38,9 +38,9 @@ run: stop ## Run docker container
 	@docker run --init -d --name $(NAME) -p 9200:9200 $(ORG)/$(NAME):$(BUILD)
 
 ssh: ## SSH into docker image
-	@docker run --init -it --rm --entrypoint=sh $(ORG)/$(NAME):$(BUILD)
+	@docker run --init -it --rm --entrypoint=bash $(ORG)/$(NAME):$(BUILD)
 
-stop: ## Kill running malice-engine docker containers
+stop: ## Kill running docker containers
 	@docker rm -f $(NAME) || true
 
 circle: ci-size ## Get docker image size from CircleCI
@@ -58,7 +58,6 @@ ci-size: ci-build
 clean: ## Clean docker image and stop all running containers
 	docker-clean stop
 	docker rmi $(ORG)/$(NAME):$(BUILD) || true
-	rm -rf malice/build
 
 # Absolutely awesome: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help:

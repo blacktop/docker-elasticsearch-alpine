@@ -1,61 +1,62 @@
-FROM alpine:3.5
+FROM openjdk:8-jre
 
 LABEL maintainer "https://github.com/blacktop"
 
-RUN apk add --no-cache openjdk8-jre tini su-exec
+# grab gosu for easy step-down from root
+ENV GOSU_VERSION 1.10
+RUN set -x \
+	&& wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
+	&& wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
+	&& export GNUPGHOME="$(mktemp -d)" \
+	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
+	&& rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc \
+	&& chmod +x /usr/local/bin/gosu \
+	&& gosu nobody true
 
-ENV ES_VERSION 5.5.1
+RUN set -ex; \
+# https://artifacts.elastic.co/GPG-KEY-elasticsearch
+	key='46095ACC8548582C1A2699A9D27D666CD88E42B4'; \
+	export GNUPGHOME="$(mktemp -d)"; \
+	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
+	gpg --export "$key" > /etc/apt/trusted.gpg.d/elastic.gpg; \
+	rm -rf "$GNUPGHOME"; \
+	apt-key list
 
-ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
-ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz"
-ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz.asc"
-ENV SHA1_URL "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz.sha1"
-ENV ES_TARBALL_SHA1 "5a63834a8bb1ea62ac4eca4755e63bcee3ae4810"
-ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html
+# https://www.elastic.co/guide/en/elasticsearch/reference/5.0/deb.html
+RUN set -x \
+	&& apt-get update && apt-get install -y --no-install-recommends apt-transport-https && rm -rf /var/lib/apt/lists/* \
+	&& echo 'deb https://artifacts.elastic.co/packages/5.x/apt stable main' > /etc/apt/sources.list.d/elasticsearch.list
+
+ENV ELASTICSEARCH_VERSION 5.5.2
+ENV ELASTICSEARCH_DEB_VERSION 5.5.2
+
+RUN set -x \
+	\
+# don't allow the package to install its sysctl file (causes the install to fail)
+# Failed to write '262144' to '/proc/sys/vm/max_map_count': Read-only file system
+	&& dpkg-divert --rename /usr/lib/sysctl.d/elasticsearch.conf \
+	\
+	&& apt-get update \
+	&& apt-get install -y --no-install-recommends "elasticsearch=$ELASTICSEARCH_DEB_VERSION" \
+	&& rm -rf /var/lib/apt/lists/*
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
-ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
-
-RUN apk add --no-cache bash
-RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
-  && echo "===> Adding glibc..." \
-  && wget --progress=bar:force -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub \
-  && wget --progress=bar:force https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r3/glibc-2.23-r3.apk \
-  && apk add glibc-2.23-r3.apk \
-  && cd /tmp \
-  && echo "===> Install Elasticsearch..." \
-  && EXPECTED_SHA=$(wget -O - ${SHA1_URL}) \
-  && wget --progress=bar:force -O elasticsearch.tar.gz "$ES_TARBAL"; \
-	if [ "$ES_TARBALL_SHA1" ]; then \
-		echo "$ES_TARBALL_SHA1 *elasticsearch.tar.gz" | sha1sum -c -; \
-	fi; \
-	if [ "$ES_TARBALL_ASC" ]; then \
-		wget --progress=bar:force -O elasticsearch.tar.gz.asc "$ES_TARBALL_ASC"; \
-		export GNUPGHOME="$(mktemp -d)"; \
-		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY"; \
-		gpg --batch --verify elasticsearch.tar.gz.asc elasticsearch.tar.gz; \
-		rm -r "$GNUPGHOME" elasticsearch.tar.gz.asc; \
-	fi; \
-  tar -xf elasticsearch.tar.gz \
-  && ls -lah \
-  && mv elasticsearch-$ES_VERSION /usr/share/elasticsearch \
-  && addgroup -g 1000 elasticsearch \
-  && adduser -D -u 1000 -G elasticsearch -h /usr/share/elasticsearch elasticsearch \
-  && echo "===> Creating Elasticsearch Paths..." \
-  && for path in \
-  	/usr/share/elasticsearch/data \
-  	/usr/share/elasticsearch/logs \
-  	/usr/share/elasticsearch/config \
-  	/usr/share/elasticsearch/config/scripts \
-  	/usr/share/elasticsearch/plugins \
-  ; do \
-  mkdir -p "$path"; \
-  chown -R elasticsearch:elasticsearch "$path"; \
-  done \
-  && rm -rf /tmp/* \
-  && apk del --purge .build-deps
 
 WORKDIR /usr/share/elasticsearch
+
+RUN set -ex \
+	&& for path in \
+		./data \
+		./logs \
+		./config \
+		./config/scripts \
+		./config/ingest-geoip \
+	; do \
+		mkdir -p "$path"; \
+		chown -R elasticsearch:elasticsearch "$path"; \
+	done
 
 # Install X-Pack plugin
 RUN elasticsearch-plugin install -b x-pack

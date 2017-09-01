@@ -43,7 +43,7 @@ blacktop/elasticsearch   6.0                 117MB
 blacktop/elasticsearch   5.5                 123MB
 blacktop/elasticsearch   5.4                 123MB
 blacktop/elasticsearch   5.3                 123MB
-blacktop/elasticsearch   x-pack              255MB
+blacktop/elasticsearch   x-pack              442MB
 blacktop/elasticsearch   geoip               156MB
 blacktop/elasticsearch   5.2                 150MB
 blacktop/elasticsearch   5.1                 149MB

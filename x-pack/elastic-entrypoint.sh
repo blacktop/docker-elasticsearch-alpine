@@ -38,7 +38,7 @@ if [ "$1" = 'master' -a "$(id -u)" = '0' ]; then
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/plugins
-	set -- su-exec elasticsearch "$@" ${es_opts}
+	set -- gosu elasticsearch "$@" ${es_opts}
 fi
 
 ################################################
@@ -61,7 +61,7 @@ if [ "$1" = 'ingest' -a "$(id -u)" = '0' ]; then
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/plugins
 
-	set -- su-exec elasticsearch "$@" ${es_opts}
+	set -- gosu elasticsearch "$@" ${es_opts}
 fi
 
 ################################################
@@ -84,7 +84,7 @@ if [ "$1" = 'data' -a "$(id -u)" = '0' ]; then
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/plugins
 
-	set -- su-exec elasticsearch "$@" ${es_opts}
+	set -- gosu elasticsearch "$@" ${es_opts}
 
 fi
 
@@ -98,7 +98,7 @@ if [ "$1" = 'elasticsearch' -a "$(id -u)" = '0' ]; then
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/plugins
 	chown -R elasticsearch:elasticsearch /tmp
 
-	set -- su-exec elasticsearch "$@" ${es_opts}
+	set -- gosu elasticsearch "$@" ${es_opts}
 fi
 
 exec "$@"
