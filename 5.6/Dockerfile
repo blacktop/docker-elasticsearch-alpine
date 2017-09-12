@@ -2,15 +2,15 @@ FROM alpine:3.6
 
 LABEL maintainer "https://github.com/blacktop"
 
-RUN apk add --no-cache openjdk8-jre tini su-exec
+RUN apk add --no-cache openjdk8-jre su-exec
 
-ENV ES_VERSION 6.0.0-beta2
+ENV ES_VERSION 5.6.0
 
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz"
 ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz.asc"
 ENV SHA1_URL "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz.sha1"
-ENV ES_TARBALL_SHA1 "c3f7c1685fc4925a4fac96fa4dfb1706c85acde6"
+ENV ES_TARBALL_SHA1 "15a79ff7206aea581f6afae48c4637210f5b3539"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache bash
