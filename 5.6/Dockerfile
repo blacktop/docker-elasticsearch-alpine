@@ -4,13 +4,13 @@ LABEL maintainer "https://github.com/blacktop"
 
 RUN apk add --no-cache openjdk8-jre su-exec
 
-ENV ES_VERSION 5.6.0
+ENV VERSION 5.6.1
 
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
-ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz"
-ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz.asc"
-ENV SHA1_URL "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz.sha1"
-ENV ES_TARBALL_SHA1 "15a79ff7206aea581f6afae48c4637210f5b3539"
+ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz"
+ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz.asc"
+ENV SHA1_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz.sha1"
+ENV ES_TARBALL_SHA1 "31168d3e6383dd5aef03b150fc718c789b6ad1dd"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache bash
@@ -31,7 +31,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
 	fi; \
   tar -xf elasticsearch.tar.gz \
   && ls -lah \
-  && mv elasticsearch-$ES_VERSION /usr/share/elasticsearch \
+  && mv elasticsearch-$VERSION /usr/share/elasticsearch \
   && adduser -D -h /usr/share/elasticsearch elasticsearch \
   && echo "===> Creating Elasticsearch Paths..." \
   && for path in \

@@ -3,12 +3,24 @@
 REPO=blacktop/elasticsearch
 ORG=blacktop
 NAME=elasticsearch
+# build info
 BUILD ?=$(shell cat LATEST)
 LATEST ?=$(shell cat LATEST)
+VERSION=$(shell cat "$(BUILD)/Dockerfile" | grep '^ENV VERSION' | cut -d" " -f3)
+# tarball info
+DOWNLOAD_URL=https://artifacts.elastic.co/downloads/$(NAME)
+SHA1_URL=$(DOWNLOAD_URL)/$(NAME)-$(VERSION).tar.gz.sha1
+TARBALL_SHA1=$(shell curl -s "$(SHA1_URL)")
+
 
 all: build size test
 
-build: ## Build docker image
+dockerfile: ## Update Dockerfiles
+	@echo "===> Getting $(NAME) tarball sha1 for version: $(VERSION)"
+	@echo " * TARBALL_SHA1=$(TARBALL_SHA1)"
+	sed -i.bu 's/TARBALL_SHA1 "[0-9a-f.]\{40\}"/TARBALL_SHA1 "$(TARBALL_SHA1)"/' $(BUILD)/Dockerfile
+
+build: dockerfile ## Build docker image
 	cd $(BUILD); docker build -t $(ORG)/$(NAME):$(BUILD) .
 
 size: build ## Get built image size

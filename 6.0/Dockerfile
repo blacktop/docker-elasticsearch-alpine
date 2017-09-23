@@ -4,12 +4,12 @@ LABEL maintainer "https://github.com/blacktop"
 
 RUN apk add --no-cache openjdk8-jre tini su-exec
 
-ENV ES_VERSION 6.0.0-beta2
+ENV VERSION 6.0.0-beta2
 
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
-ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz"
-ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz.asc"
-ENV SHA1_URL "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz.sha1"
+ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz"
+ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz.asc"
+ENV SHA1_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz.sha1"
 ENV ES_TARBALL_SHA1 "c3f7c1685fc4925a4fac96fa4dfb1706c85acde6"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
@@ -31,7 +31,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
 	fi; \
   tar -xf elasticsearch.tar.gz \
   && ls -lah \
-  && mv elasticsearch-$ES_VERSION /usr/share/elasticsearch \
+  && mv elasticsearch-$VERSION /usr/share/elasticsearch \
   && adduser -D -h /usr/share/elasticsearch elasticsearch \
   && echo "===> Creating Elasticsearch Paths..." \
   && for path in \
