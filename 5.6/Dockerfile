@@ -5,11 +5,10 @@ LABEL maintainer "https://github.com/blacktop"
 RUN apk add --no-cache openjdk8-jre su-exec
 
 ENV VERSION 5.6.2
-
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz"
 ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz.asc"
-ENV SHA1_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz.sha1"
+ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz.sha512"
 ENV ES_TARBALL_SHA "a20cd6607cc9fd94b37c8592b2aaaede4136349d66175581ccba999bc5a64038387680f471fca600afc2b538e4aecbb9d3ee1f82aa327853d072feff2f950319"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
@@ -17,7 +16,6 @@ RUN apk add --no-cache bash
 RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   && cd /tmp \
   && echo "===> Install Elasticsearch..." \
-  && EXPECTED_SHA=$(wget -O - ${SHA1_URL}) \
   && wget --progress=bar:force -O elasticsearch.tar.gz "$ES_TARBAL"; \
 	if [ "$ES_TARBALL_SHA" ]; then \
 		echo "$ES_TARBALL_SHA *elasticsearch.tar.gz" | sha512sum -c -; \

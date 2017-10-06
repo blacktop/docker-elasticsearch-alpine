@@ -10,15 +10,15 @@ VERSION=$(shell cat "$(BUILD)/Dockerfile" | grep '^ENV VERSION' | cut -d" " -f3)
 # tarball info
 DOWNLOAD_URL=https://artifacts.elastic.co/downloads/$(NAME)
 SHA_URL=$(DOWNLOAD_URL)/$(NAME)-$(VERSION).tar.gz.sha512
-TARBALL_SHA512=$(shell curl -s "$(SHA_URL)")
+TARBALL_SHA=$(shell curl -s "$(SHA_URL)")
 
 
 all: build size test
 
 dockerfile: ## Update Dockerfiles
 	@echo "===> Getting $(NAME) tarball sha1 for version: $(VERSION)"
-	@echo " * TARBALL_SHA512=$(TARBALL_SHA512)"
-	sed -i.bu 's/TARBALL_SHA512 "[0-9a-f.]\{40\}"/TARBALL_SHA512 "$(TARBALL_SHA512)"/' $(BUILD)/Dockerfile
+	@echo " * TARBALL_SHA=$(TARBALL_SHA)"
+	sed -i.bu 's/TARBALL_SHA "[0-9a-f.]\{128\}"/TARBALL_SHA "$(TARBALL_SHA)"/' $(BUILD)/Dockerfile
 
 build: dockerfile ## Build docker image
 	cd $(BUILD); docker build -t $(ORG)/$(NAME):$(BUILD) .
