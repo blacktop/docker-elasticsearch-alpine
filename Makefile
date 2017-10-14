@@ -16,9 +16,11 @@ TARBALL_SHA=$(shell curl -s "$(SHA_URL)")
 all: build size test
 
 dockerfile: ## Update Dockerfiles
+ifneq "$(BUILD)" "x-pack"
 	@echo "===> Getting $(NAME) tarball sha1 for version: $(VERSION)"
 	@echo " * TARBALL_SHA=$(TARBALL_SHA)"
 	sed -i.bu 's/TARBALL_SHA "[0-9a-f.]\{128\}"/TARBALL_SHA "$(TARBALL_SHA)"/' $(BUILD)/Dockerfile
+endif
 
 build: dockerfile ## Build docker image
 	cd $(BUILD); docker build -t $(ORG)/$(NAME):$(BUILD) .
@@ -34,7 +36,7 @@ tags:
 	docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}" $(ORG)/$(NAME)
 
 test: stop ## Test docker image
-	docker run -d --name $(NAME) -p 9200:9200 -e cluster.name=testcluster $(ORG)/$(NAME):$(BUILD); sleep 15;
+	docker run -d --name $(NAME) -p 9200:9200 -e cluster.name=testcluster $(ORG)/$(NAME):$(BUILD); sleep 20;
 	docker logs $(NAME)
 	http localhost:9200 | jq .cluster_name
 	docker rm -f $(NAME)
