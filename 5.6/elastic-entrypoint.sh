@@ -2,6 +2,9 @@
 
 set -e
 
+# Files created by Elasticsearch should always be group writable too
+umask 0002
+
 es_opts=''
 
 while IFS='=' read -r envvar_key envvar_value
