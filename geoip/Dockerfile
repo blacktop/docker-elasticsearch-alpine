@@ -4,16 +4,17 @@ LABEL maintainer "https://github.com/blacktop"
 
 RUN apk add --no-cache openjdk8-jre su-exec
 
-ENV VERSION 6.0.0
+ENV VERSION 6.0.1
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz"
 ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz.asc"
 ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz.sha512"
-ENV ES_TARBALL_SHA "25bb622d2fc557d8b8eded634a9b333766f7b58e701359e1bcfafee390776eb323cb7ea7a5e02e8803e25d8b1d3aabec0ec1b0cf492d0bab5689686fe440181c  elasticsearch-6.0.0.tar.gz"
+ENV ES_TARBALL_SHA "b86a04acd194e7e96e3a32de6ab4983d6569ffb1714f2af9e2b49623004987e13e57c5db055153a188f5d2d7eea63d649fa87769f7625f3fc4923e0cd5b8f3ee"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache bash
 RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
+  && set -e \
   && cd /tmp \
   && echo "===> Install Elasticsearch..." \
   && wget --progress=bar:force -O elasticsearch.tar.gz "$ES_TARBAL"; \
@@ -25,7 +26,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
 		export GNUPGHOME="$(mktemp -d)"; \
 		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY"; \
 		gpg --batch --verify elasticsearch.tar.gz.asc elasticsearch.tar.gz; \
-		rm -r "$GNUPGHOME" elasticsearch.tar.gz.asc; \
+		rm -rf "$GNUPGHOME" elasticsearch.tar.gz.asc; \
 	fi; \
   tar -xf elasticsearch.tar.gz \
   && ls -lah \
