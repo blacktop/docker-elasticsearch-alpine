@@ -3,8 +3,9 @@
 set -e
 
 VERSION=$(cat Dockerfile | grep '^ENV VERSION' | cut -d" " -f3)
+TAGS=($VERSION, 5)
 
-for TAG in {$VERSION, 5}; do
+for TAG in "${TAGS[@]}"; do
   docker tag $IMAGE_NAME $DOCKER_REPO:$TAG
   docker push $DOCKER_REPO:$TAG
 done
