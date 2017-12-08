@@ -15,7 +15,7 @@ ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache bash
 RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
-  && set -e \
+  && set -ex \
   && cd /tmp \
   && echo "===> Install Elasticsearch..." \
   && wget --progress=bar:force -O elasticsearch.tar.gz "$ES_TARBAL"; \
