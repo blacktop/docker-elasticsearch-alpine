@@ -5,5 +5,5 @@ VERSION=$(cat Dockerfile | grep '^ENV VERSION' | cut -d" " -f3)
 re='^[0-9]+([.][0-9]+)?$'
 if [[ $CACHE_TAG =~ $re ]] ; then
   docker tag $IMAGE_NAME $DOCKER_REPO:$VERSION
-  docker push $DOCKER_REPO:$VERSION CACHE_TAG
+  docker push $DOCKER_REPO:$VERSION
 fi
