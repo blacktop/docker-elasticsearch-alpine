@@ -29,7 +29,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
       || gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" \
       || gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY" ); \
 		gpg --batch --verify elasticsearch.tar.gz.asc elasticsearch.tar.gz; \
-		rm -rf "$GNUPGHOME" elasticsearch.tar.gz.asc; \
+		rm -rf "$GNUPGHOME" elasticsearch.tar.gz.asc || true; \
 	fi; \
   tar -xf elasticsearch.tar.gz \
   && ls -lah \
