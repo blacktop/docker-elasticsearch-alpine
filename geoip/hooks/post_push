@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+VERSION=$(cat Dockerfile | grep '^ENV VERSION' | cut -d" " -f3)
+
+for TAG in {$VERSION, 6}; do
+  docker tag $IMAGE_NAME $DOCKER_REPO:$CACHE_TAG-$TAG
+  docker push $DOCKER_REPO:$CACHE_TAG-$TAG
+done
