@@ -16,7 +16,7 @@ update:
 .PHONY: dockerfile
 dockerfile: ## Update Dockerfiles
 ifneq "$(BUILD)" "x-pack"
-	scripts/update_dockerfile.sh
+	hack/make/dockerfile
 endif
 
 .PHONY: build
