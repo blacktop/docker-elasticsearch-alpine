@@ -31,6 +31,10 @@ ifeq "$(BUILD)" "$(LATEST)"
 endif
 	sed -i.bu '/$(BUILD)/ s/[0-9.]\{3,5\}MB/$(shell docker images --format "{{.Size}}" $(ORG)/$(NAME):$(BUILD))/' README.md
 
+.PHONY: tag
+tag:
+	ORG=$(ORG) NAME=$(NAME) BUILD=$(BUILD) hack/make/tag
+
 .PHONY: tags
 tags:
 	docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}" $(ORG)/$(NAME)
