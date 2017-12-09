@@ -1,11 +1,10 @@
-FROM alpine:3.6
+FROM alpine:3.7
 
 LABEL maintainer "https://github.com/blacktop"
 
 RUN apk add --no-cache openjdk8-jre su-exec
 
 ENV VERSION 6.0.1
-
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz"
 ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz.asc"
@@ -25,10 +24,10 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
 	if [ "$ES_TARBALL_ASC" ]; then \
 		wget --progress=bar:force -O elasticsearch.tar.gz.asc "$ES_TARBALL_ASC"; \
 		export GNUPGHOME="$(mktemp -d)"; \
-		( gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
+    ( gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
       || gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" \
       || gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY" ); \
-		gpg --batch --verify elasticsearch.tar.gz.asc elasticsearch.tar.gz; \
+		gpg --batch --verify elasticsearch.tar.gz.asc logstash.tar.gz; \
 		rm -rf "$GNUPGHOME" elasticsearch.tar.gz.asc || true; \
 	fi; \
   tar -xf elasticsearch.tar.gz \
