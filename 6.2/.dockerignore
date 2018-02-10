@@ -1,0 +1,12 @@
+# Ignore .git folder
+.git*
+.gitignore
+
+es-logo.png
+LICENSE
+README.md
+docker-compose.yml
+.DS_Store
+build
+release
+Makefile
