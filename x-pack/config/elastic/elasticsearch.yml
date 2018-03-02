@@ -1,3 +1,4 @@
+# cluster.name: "docker-cluster"
 network.host: 0.0.0.0
 
 # this value is required because we set "network.host"
@@ -7,3 +8,22 @@ discovery.zen.minimum_master_nodes: 1
 node.master: true
 node.ingest: true
 node.data: true
+
+xpack.license.self_generated.type: trial
+
+discovery.type: "single-node"
+
+# bin/elasticsearch-keystore create
+# echo "changeme" | bin/elasticsearch-keystore add -x 'bootstrap.password'
+
+# xpack.security.authc.accept_default_password: true
+
+# http -a elastic:changeme localhost:9200
+# curl -u elastic:changeme http://127.0.0.1:9200
+
+# bin/x-pack/setup-passwords \
+# auto --batch \
+# -Expack.ssl.certificate=x-pack/certificates/es01/es01.crt \
+# -Expack.ssl.certificate_authorities=x-pack/certificates/ca/ca.crt \
+# -Expack.ssl.key=x-pack/certificates/es01/es01.key \
+# --url https://localhost:9200

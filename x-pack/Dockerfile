@@ -16,12 +16,13 @@ RUN set -x \
 
 RUN set -ex; \
 	# https://artifacts.elastic.co/GPG-KEY-elasticsearch
-	key='46095ACC8548582C1A2699A9D27D666CD88E42B4'; \
-	export GNUPGHOME="$(mktemp -d)"; \
-	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
-	gpg --export "$key" > /etc/apt/trusted.gpg.d/elastic.gpg; \
-	rm -rf "$GNUPGHOME"; \
-	apt-key list
+	wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+# key='46095ACC8548582C1A2699A9D27D666CD88E42B4'; \
+# export GNUPGHOME="$(mktemp -d)"; \
+# gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
+# gpg --export "$key" > /etc/apt/trusted.gpg.d/elastic.gpg; \
+# rm -rf "$GNUPGHOME"; \
+# apt-key list
 
 # https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html
 # https://www.elastic.co/guide/en/elasticsearch/reference/5.0/deb.html
