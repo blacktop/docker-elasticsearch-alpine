@@ -15,7 +15,7 @@ RUN set -x \
 	&& gosu nobody true
 
 RUN set -ex; \
-# https://artifacts.elastic.co/GPG-KEY-elasticsearch
+	# https://artifacts.elastic.co/GPG-KEY-elasticsearch
 	key='46095ACC8548582C1A2699A9D27D666CD88E42B4'; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
@@ -29,13 +29,13 @@ RUN set -x \
 	&& apt-get update && apt-get install -y --no-install-recommends apt-transport-https && rm -rf /var/lib/apt/lists/* \
 	&& echo 'deb https://artifacts.elastic.co/packages/6.x/apt stable main' > /etc/apt/sources.list.d/elasticsearch.list
 
-ENV ELASTICSEARCH_VERSION 6.2.1
-ENV ELASTICSEARCH_DEB_VERSION 6.2.1
+ENV ELASTICSEARCH_VERSION 6.2.2
+ENV ELASTICSEARCH_DEB_VERSION 6.2.2
 
 RUN set -x \
 	\
-# don't allow the package to install its sysctl file (causes the install to fail)
-# Failed to write '262144' to '/proc/sys/vm/max_map_count': Read-only file system
+	# don't allow the package to install its sysctl file (causes the install to fail)
+	# Failed to write '262144' to '/proc/sys/vm/max_map_count': Read-only file system
 	&& dpkg-divert --rename /usr/lib/sysctl.d/elasticsearch.conf \
 	\
 	&& apt-get update \
@@ -48,14 +48,14 @@ WORKDIR /usr/share/elasticsearch
 
 RUN set -ex \
 	&& for path in \
-		./data \
-		./logs \
-		./config \
-		./config/scripts \
-		./config/ingest-geoip \
+	./data \
+	./logs \
+	./config \
+	./config/scripts \
+	./config/ingest-geoip \
 	; do \
-		mkdir -p "$path"; \
-		chown -R elasticsearch:elasticsearch "$path"; \
+	mkdir -p "$path"; \
+	chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
 # Install X-Pack plugin

@@ -4,12 +4,12 @@ LABEL maintainer "https://github.com/blacktop"
 
 RUN apk add --no-cache openjdk8-jre su-exec
 
-ENV VERSION 6.2.1
+ENV VERSION 6.2.2
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz"
 ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz.asc"
 ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}.tar.gz.sha512"
-ENV ES_TARBALL_SHA "12ad78a5ef0a5de487f264f4efdfc4735155462e525a9a75343f4678f84daa0021ad1e5637e754eb55672bfa63f5c34ff6252de36b09539f08735cdd26499ab4"
+ENV ES_TARBALL_SHA "e8363a3022b7c8d67be37bcdf4d026cefb166403dcdb19950fdf2da508eb0ccfe2b2e3717a60edb932b7b6f5ec94cd06726d4fc5c7bcdd24711df16945fb8c5c"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache bash
@@ -18,30 +18,30 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   && cd /tmp \
   && echo "===> Install Elasticsearch..." \
   && wget --progress=bar:force -O elasticsearch.tar.gz "$ES_TARBAL"; \
-	if [ "$ES_TARBALL_SHA1" ]; then \
-		echo "$ES_TARBALL_SHA1 *elasticsearch.tar.gz" | sha1sum -c -; \
-	fi; \
-	if [ "$ES_TARBALL_ASC" ]; then \
-		wget --progress=bar:force -O elasticsearch.tar.gz.asc "$ES_TARBALL_ASC"; \
-		export GNUPGHOME="$(mktemp -d)"; \
-    ( gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
-      || gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" \
-      || gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY" ); \
-		gpg --batch --verify elasticsearch.tar.gz.asc elasticsearch.tar.gz; \
-		rm -rf "$GNUPGHOME" elasticsearch.tar.gz.asc || true; \
-	fi; \
+  if [ "$ES_TARBALL_SHA1" ]; then \
+  echo "$ES_TARBALL_SHA1 *elasticsearch.tar.gz" | sha1sum -c -; \
+  fi; \
+  if [ "$ES_TARBALL_ASC" ]; then \
+  wget --progress=bar:force -O elasticsearch.tar.gz.asc "$ES_TARBALL_ASC"; \
+  export GNUPGHOME="$(mktemp -d)"; \
+  ( gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
+  || gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" \
+  || gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY" ); \
+  gpg --batch --verify elasticsearch.tar.gz.asc elasticsearch.tar.gz; \
+  rm -rf "$GNUPGHOME" elasticsearch.tar.gz.asc || true; \
+  fi; \
   tar -xf elasticsearch.tar.gz \
   && ls -lah \
   && mv elasticsearch-$VERSION /usr/share/elasticsearch \
   && adduser -DH -s /sbin/nologin elasticsearch \
   && echo "===> Creating Elasticsearch Paths..." \
   && for path in \
-  	/usr/share/elasticsearch/data \
-  	/usr/share/elasticsearch/logs \
-  	/usr/share/elasticsearch/config \
-  	/usr/share/elasticsearch/config/scripts \
-    /usr/share/elasticsearch/tmp \
-  	/usr/share/elasticsearch/plugins \
+  /usr/share/elasticsearch/data \
+  /usr/share/elasticsearch/logs \
+  /usr/share/elasticsearch/config \
+  /usr/share/elasticsearch/config/scripts \
+  /usr/share/elasticsearch/tmp \
+  /usr/share/elasticsearch/plugins \
   ; do \
   mkdir -p "$path"; \
   chown -R elasticsearch:elasticsearch "$path"; \
