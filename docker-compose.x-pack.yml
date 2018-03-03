@@ -6,8 +6,10 @@ services:
   #############################
   master:
     restart: unless-stopped
-    image: blacktop/elasticsearch:6.2
+    image: blacktop/elasticsearch:x-pack
     environment:
+      - ELASTIC_PASSWORD=pleasechangeme
+      - xpack.security.audit.enabled=true
       - cluster.name=docker-cluster
       - node.name=master-node
       - node.master=true
@@ -22,8 +24,10 @@ services:
   ####################################
   ingest:
     restart: unless-stopped
-    image: blacktop/elasticsearch:6.2
+    image: blacktop/elasticsearch:x-pack
     environment:
+      - ELASTIC_PASSWORD=pleasechangeme
+      - xpack.security.audit.enabled=true
       - cluster.name=docker-cluster
       - node.name=ingest-node-1
       - node.master=true
@@ -41,8 +45,10 @@ services:
   ###########################
   data:
     restart: unless-stopped
-    image: blacktop/elasticsearch:6.2
+    image: blacktop/elasticsearch:x-pack
     environment:
+      - ELASTIC_PASSWORD=pleasechangeme
+      - xpack.security.audit.enabled=true
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
       - cluster.name=docker-cluster
       - node.name=data-node-1
@@ -60,7 +66,7 @@ services:
   # KIBANA NODE #
   ###############
   kibana:
-    image: blacktop/kibana:6.2
+    image: blacktop/kibana:x-pack
     ports:
       - "80:5601"
     links:
