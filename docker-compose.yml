@@ -9,7 +9,6 @@ services:
     image: blacktop/elasticsearch:6.2
     environment:
       - cluster.name=docker-cluster
-      - node.name=master-node
       - node.master=true
       - node.ingest=false
       - node.data=false
@@ -25,7 +24,6 @@ services:
     image: blacktop/elasticsearch:6.2
     environment:
       - cluster.name=docker-cluster
-      - node.name=ingest-node-1
       - node.master=true
       - node.ingest=true
       - node.data=false
@@ -45,7 +43,6 @@ services:
     environment:
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
       - cluster.name=docker-cluster
-      - node.name=data-node-1
       - node.master=false
       - node.ingest=false
       - node.data=true

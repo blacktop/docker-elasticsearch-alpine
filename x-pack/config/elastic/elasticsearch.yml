@@ -5,13 +5,13 @@ network.host: 0.0.0.0
 # be sure to modify it appropriately for a production cluster deployment
 discovery.zen.minimum_master_nodes: 1
 
-node.master: true
-node.ingest: true
-node.data: true
+# node.master: true
+# node.ingest: true
+# node.data: true
 
 xpack.license.self_generated.type: trial
 
-discovery.type: "single-node"
+# discovery.type: "single-node"
 
 # bin/elasticsearch-keystore create
 # echo "changeme" | bin/elasticsearch-keystore add -x 'bootstrap.password'

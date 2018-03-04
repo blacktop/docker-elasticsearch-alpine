@@ -71,6 +71,11 @@ services:
       - "80:5601"
     links:
      - ingest:elasticsearch
+    environment:
+      - elasticsearch.url=http://elasticsearch:9200
+      - elasticsearch.username=elastic
+      - elasticsearch.password=pleasechangeme
+      - xpack.monitoring.ui.container.elasticsearch.enabled=true
     networks:
       - elastic
 #############################
