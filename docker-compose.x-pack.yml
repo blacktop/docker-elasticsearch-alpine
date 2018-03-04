@@ -9,6 +9,7 @@ services:
     image: blacktop/elasticsearch:x-pack
     environment:
       - cluster.name=docker-cluster
+      - network.host=0
       - ELASTIC_PASSWORD=pleasechangeme
       - xpack.security.audit.enabled=true
       - node.master=true
@@ -47,6 +48,7 @@ services:
     image: blacktop/elasticsearch:x-pack
     environment:
       - cluster.name=docker-cluster
+      - network.host=0
       - ELASTIC_PASSWORD=pleasechangeme
       - xpack.security.audit.enabled=true
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
