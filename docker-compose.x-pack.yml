@@ -8,10 +8,9 @@ services:
     restart: unless-stopped
     image: blacktop/elasticsearch:x-pack
     environment:
+      - cluster.name=docker-cluster
       - ELASTIC_PASSWORD=pleasechangeme
       - xpack.security.audit.enabled=true
-      - cluster.name=docker-cluster
-      - node.name=master-node
       - node.master=true
       - node.ingest=false
       - node.data=false
@@ -26,10 +25,10 @@ services:
     restart: unless-stopped
     image: blacktop/elasticsearch:x-pack
     environment:
+      - cluster.name=docker-cluster
+      - network.host=0
       - ELASTIC_PASSWORD=pleasechangeme
       - xpack.security.audit.enabled=true
-      - cluster.name=docker-cluster
-      - node.name=ingest-node-1
       - node.master=true
       - node.ingest=true
       - node.data=false
@@ -47,11 +46,10 @@ services:
     restart: unless-stopped
     image: blacktop/elasticsearch:x-pack
     environment:
+      - cluster.name=docker-cluster
       - ELASTIC_PASSWORD=pleasechangeme
       - xpack.security.audit.enabled=true
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
-      - cluster.name=docker-cluster
-      - node.name=data-node-1
       - node.master=false
       - node.ingest=false
       - node.data=true
