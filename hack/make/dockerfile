@@ -1,11 +1,16 @@
 #!/bin/bash
 
 VERSION=$(cat "$BUILD/Dockerfile" | grep '^ENV VERSION' | cut -d" " -f3)
-# tarball info
-DOWNLOAD_URL=https://artifacts.elastic.co/downloads/$NAME
-SHA_URL=$DOWNLOAD_URL/$NAME-$VERSION.tar.gz.sha512
+# ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
+# ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz"
+# ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz.asc"
+# ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearchoss--${VERSION}.tar.gz.sha512"
+
+DOWNLOAD_URL="https://artifacts.elastic.co/downloads/elasticsearch"
+EXPECTED_SHA_URL=$(cat "$BUILD/Dockerfile" | grep '^ENV EXPECTED_SHA_URL' | cut -d" " -f3)
 
 echo "===> Getting $BUILD tarball sha1 for version: $VERSION"
+SHA_URL=$(eval echo $EXPECTED_SHA_URL)
 TARBALL_SHA=$(curl -s "$SHA_URL" | cut -d" " -f1)
 
 echo " * TARBALL_SHA=$TARBALL_SHA"

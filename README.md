@@ -3,7 +3,7 @@
 docker-elasticsearch-alpine
 ===========================
 
-[![CircleCI](https://circleci.com/gh/blacktop/docker-elasticsearch-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-elasticsearch-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/elasticsearch.svg)](https://hub.docker.com/r/blacktop/elasticsearch/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/elasticsearch.svg)](https://hub.docker.com/r/blacktop/elasticsearch/) [![Docker Image](https://img.shields.io/badge/docker%20image-119MB-blue.svg)](https://hub.docker.com/r/blacktop/elasticsearch/)
+[![CircleCI](https://circleci.com/gh/blacktop/docker-elasticsearch-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-elasticsearch-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/elasticsearch.svg)](https://hub.docker.com/r/blacktop/elasticsearch/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/elasticsearch.svg)](https://hub.docker.com/r/blacktop/elasticsearch/) [![Docker Image](https://img.shields.io/badge/docker%20image-120MB-blue.svg)](https://hub.docker.com/r/blacktop/elasticsearch/)
 
 Alpine Linux based [Elasticsearch](https://www.elastic.co/products/elasticsearch) Docker Image
 
@@ -49,7 +49,7 @@ Image Tags
 
 ```bash
 REPOSITORY               TAG                 SIZE
-blacktop/elasticsearch   latest              119MB
+blacktop/elasticsearch   latest              120MB
 blacktop/elasticsearch   6.2                 119MB
 blacktop/elasticsearch   6.1                 119MB
 blacktop/elasticsearch   6.0                 117MB
@@ -57,7 +57,7 @@ blacktop/elasticsearch   5.6                 124MB
 blacktop/elasticsearch   5.5                 123MB
 blacktop/elasticsearch   5.4                 123MB
 blacktop/elasticsearch   5.3                 123MB
-blacktop/elasticsearch   x-pack              702MB
+blacktop/elasticsearch   x-pack              760MB
 blacktop/elasticsearch   geoip               150MB
 blacktop/elasticsearch   5.2                 150MB
 blacktop/elasticsearch   5.1                 149MB

@@ -9,7 +9,7 @@ discovery.zen.minimum_master_nodes: 1
 # node.ingest: true
 # node.data: true
 
-xpack.license.self_generated.type: trial
+action.auto_create_index: .security,.monitoring*,.watches,.triggered_watches,.watcher-history*,.ml*
 
 # discovery.type: "single-node"
 
