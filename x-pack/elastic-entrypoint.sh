@@ -19,11 +19,19 @@ done < <(env)
 
 export ES_JAVA_OPTS="-Des.cgroups.hierarchy.override=/ $ES_JAVA_OPTS"
 
-# Determine if x-pack is enabled
-if bin/elasticsearch-plugin list -s | grep -q x-pack; then
+
+if [[ -d bin/x-pack ]]; then
+    # Check for the ELASTIC_PASSWORD environment variable to set the
+    # bootstrap password for Security.
+    #
+    # This is only required for the first node in a cluster with Security
+    # enabled, but we have no way of knowing which node we are yet. We'll just
+    # honor the variable if it's present.
     if [[ -n "$ELASTIC_PASSWORD" ]]; then
-        [[ -f config/elasticsearch.keystore ]] ||  bin/elasticsearch-keystore create
-        echo "$ELASTIC_PASSWORD" | bin/elasticsearch-keystore add -x 'bootstrap.password'
+        [[ -f /usr/share/elasticsearch/config/elasticsearch.keystore ]] || (elasticsearch-keystore create)
+        if ! (elasticsearch-keystore list | grep -q '^bootstrap.password$'); then
+            (echo "$ELASTIC_PASSWORD" | elasticsearch-keystore add -x 'bootstrap.password')
+        fi
     fi
 fi
 

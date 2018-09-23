@@ -1,4 +1,4 @@
-# cluster.name: "docker-cluster"
+cluster.name: "docker-cluster"
 network.host: 0.0.0.0
 
 # this value is required because we set "network.host"

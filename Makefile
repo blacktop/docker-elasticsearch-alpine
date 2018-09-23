@@ -57,7 +57,7 @@ push: build ## Push docker image to docker registry
 
 .PHONY: run
 run: stop ## Run docker container
-	@docker run --init -d --name $(NAME) -p 9200:9200 $(ORG)/$(NAME):$(BUILD)
+	@docker run --init -it --rm --name $(NAME) -p 9200:9200 -e ELASTIC_PASSWORD=password $(ORG)/$(NAME):$(BUILD)
 
 .PHONY: ssh
 ssh: ## SSH into docker image
