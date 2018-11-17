@@ -28,7 +28,7 @@ if [[ -d bin/x-pack ]]; then
     # enabled, but we have no way of knowing which node we are yet. We'll just
     # honor the variable if it's present.
     if [[ -n "$ELASTIC_PASSWORD" ]]; then
-        [[ -f /usr/share/elasticsearch/config/elasticsearch.keystore ]] || (elasticsearch-keystore create)
+        [[ -f /usr/share/elasticsearch/config/elasticsearch.keystore ]] || (echo "y" | elasticsearch-keystore create)
         if ! (elasticsearch-keystore list | grep -q '^bootstrap.password$'); then
             (echo "$ELASTIC_PASSWORD" | elasticsearch-keystore add -x 'bootstrap.password')
         fi
@@ -44,9 +44,9 @@ fi
 # allow the container to be started with `--user`
 if [ "$1" = 'elasticsearch' -a "$(id -u)" = '0' ]; then
 	# Change the ownership of user-mutable directories to elasticsearch
-	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/{data,logs}
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/{data,logs,config}
 
-	set -- gosu elasticsearch "$@" "${es_opts[@]}"
+	set -- chroot --userspec=elasticsearch / "$@" "${es_opts[@]}"
 fi
 
 exec "$@"

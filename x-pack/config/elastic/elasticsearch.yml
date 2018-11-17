@@ -4,20 +4,18 @@ network.host: 0.0.0.0
 # this value is required because we set "network.host"
 # be sure to modify it appropriately for a production cluster deployment
 discovery.zen.minimum_master_nodes: 1
-
 # node.master: true
 # node.ingest: true
 # node.data: true
 
 action.auto_create_index: .security,.monitoring*,.watches,.triggered_watches,.watcher-history*,.ml*
-
 # discovery.type: "single-node"
 
 # bin/elasticsearch-keystore create
 # echo "changeme" | bin/elasticsearch-keystore add -x 'bootstrap.password'
 
 # xpack.security.authc.accept_default_password: true
-
+# xpack.security.transport.ssl.enabled: false
 # http -a elastic:changeme localhost:9200
 # curl -u elastic:changeme http://127.0.0.1:9200
 

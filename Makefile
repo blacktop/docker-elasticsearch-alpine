@@ -57,11 +57,11 @@ push: build ## Push docker image to docker registry
 
 .PHONY: run
 run: stop ## Run docker container
-	@docker run --init -it --rm --name $(NAME) -p 9200:9200 -e ELASTIC_PASSWORD=password $(ORG)/$(NAME):$(BUILD)
+	docker run --init -it --rm --name $(NAME) -p 9200:9200 -e ELASTIC_PASSWORD=password -e "discovery.type=single-node" $(ORG)/$(NAME):$(BUILD)
 
 .PHONY: ssh
 ssh: ## SSH into docker image
-	@docker run --init -it --rm --entrypoint=bash $(ORG)/$(NAME):$(BUILD)
+	@docker run --init -it --rm -p 9200:9200 --entrypoint=bash $(ORG)/$(NAME):$(BUILD)
 
 .PHONY: stop
 stop: ## Kill running docker containers

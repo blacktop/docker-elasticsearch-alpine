@@ -2,18 +2,6 @@ FROM openjdk:11-jre
 
 LABEL maintainer "https://github.com/blacktop"
 
-# grab gosu for easy step-down from root
-ENV GOSU_VERSION 1.10
-RUN set -x \
-	&& wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
-	&& wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
-	&& export GNUPGHOME="$(mktemp -d)" \
-	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-	&& rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc \
-	&& chmod +x /usr/local/bin/gosu \
-	&& gosu nobody true
-
 RUN set -ex; \
 	# https://artifacts.elastic.co/GPG-KEY-elasticsearch
 	wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
@@ -32,6 +20,7 @@ RUN set -x \
 
 ENV ELASTICSEARCH_VERSION 6.5.0
 ENV ELASTICSEARCH_DEB_VERSION 6.5.0
+ENV ELASTIC_CONTAINER=true
 
 RUN set -x \
 	\
@@ -59,13 +48,11 @@ RUN set -ex \
 	chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
-# Install X-Pack plugin
-# RUN elasticsearch-plugin install -b x-pack
 # Install geoip/user-agent plugin
 RUN elasticsearch-plugin install -b ingest-geoip
 RUN elasticsearch-plugin install -b ingest-user-agent
 
-COPY config/elastic /usr/share/elasticsearch/config
+COPY config/elastic/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
 COPY config/x-pack/log4j2.properties /usr/share/elasticsearch/config/x-pack/
 COPY config/logrotate /etc/logrotate.d/elasticsearch
 COPY elastic-entrypoint.sh /
