@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION=$(cat Dockerfile | grep '^ENV VERSION' | cut -d" " -f3)
+VERSION=$(cat Dockerfile | grep '^ENV ELASTICSEARCH_VERSION' | cut -d" " -f3)
 TAGS=($VERSION 6)
 
 for TAG in "${TAGS[@]}"; do
