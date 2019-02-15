@@ -41,8 +41,9 @@ tags:
 
 .PHONY: test
 test: stop ## Test docker image
-	docker run -d --name $(NAME) -p 9200:9200 -e cluster.name=testcluster $(ORG)/$(NAME):$(BUILD); sleep 20;
-	docker logs $(NAME)
+	docker run -d --name $(NAME) -p 9200:9200 -e cluster.name=testcluster $(ORG)/$(NAME):$(BUILD)
+	@wait-for-es
+	@docker logs $(NAME)
 	http localhost:9200 | jq .cluster_name
 	docker rm -f $(NAME)
 
