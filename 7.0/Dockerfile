@@ -4,22 +4,23 @@ LABEL maintainer "https://github.com/blacktop"
 
 RUN apk add --no-cache openjdk8-jre su-exec
 
-ENV VERSION 6.6.1
+ENV VERSION 7.0.0-beta1
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
-ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz"
-ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz.asc"
-ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz.sha512"
-ENV ES_TARBALL_SHA "0e536ff760673dd740f790f1b0c01d984bf989a4a9ad3c4fe998de4f824330ce0d5ea18f04421a8648af719aabd25a4393f90182079186e48cef539b5621914c"
+ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz"
+ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz.asc"
+ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz.sha512"
+ENV ES_TARBALL_SHA "9eae47c7557d5bd9b28e4cd88ea2fd3fb3c3f9e15e165f77ac037917f3f88601604a5253e6d48fd9bda5e0e50b85349c625e49139525f718d0e003ca3b3d2a9d"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
-
+# https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.0.0-beta1-linux-x86_64.tar.gz
+# https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.0.0-beta1-linux-x86_64.tar.gz.sha512
 RUN apk add --no-cache bash
 RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   && set -ex \
   && cd /tmp \
   && echo "===> Install Elasticsearch..." \
   && wget --progress=bar:force -O elasticsearch.tar.gz "$ES_TARBAL"; \
-  if [ "$ES_TARBALL_SHA1" ]; then \
-  echo "$ES_TARBALL_SHA1 *elasticsearch.tar.gz" | sha1sum -c -; \
+  if [ "$ES_TARBALL_SHA" ]; then \
+  echo "$ES_TARBALL_SHA *elasticsearch.tar.gz" | sha512sum -c -; \
   fi; \
   if [ "$ES_TARBALL_ASC" ]; then \
   wget --progress=bar:force -O elasticsearch.tar.gz.asc "$ES_TARBALL_ASC"; \
@@ -33,7 +34,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   tar -xf elasticsearch.tar.gz \
   && ls -lah \
   && mv elasticsearch-$VERSION /usr/share/elasticsearch \
-  && adduser -DH -s /sbin/nologin elasticsearch \
+  && adduser -D -h /usr/share/elasticsearch elasticsearch \
   && echo "===> Creating Elasticsearch Paths..." \
   && for path in \
   /usr/share/elasticsearch/data \
@@ -49,19 +50,19 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
-ENV PATH /usr/share/elasticsearch/bin:$PATH
-ENV ES_TMPDIR /usr/share/elasticsearch/tmp
-
-WORKDIR /usr/share/elasticsearch
-
-# Install geoip/user-agent plugin
-RUN elasticsearch-plugin install -b ingest-geoip
-RUN elasticsearch-plugin install -b ingest-user-agent
+# TODO: remove this (it removes X-Pack ML so it works on Alpine)
+RUN rm -rf /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64
 
 COPY config/elastic /usr/share/elasticsearch/config
 COPY config/logrotate /etc/logrotate.d/elasticsearch
 COPY elastic-entrypoint.sh /
+RUN chmod +x /elastic-entrypoint.sh
 COPY docker-healthcheck /usr/local/bin/
+
+WORKDIR /usr/share/elasticsearch
+
+ENV PATH /usr/share/elasticsearch/bin:$PATH
+ENV ES_TMPDIR /usr/share/elasticsearch/tmp
 
 VOLUME ["/usr/share/elasticsearch/data"]
 

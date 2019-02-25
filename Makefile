@@ -21,7 +21,7 @@ endif
 
 .PHONY: build
 build: ## Build docker image
-	cd $(BUILD); docker build -t $(ORG)/$(NAME):$(BUILD) .
+	cd $(BUILD); docker build --pull --squash -t $(ORG)/$(NAME):$(BUILD) .
 
 .PHONY: size
 size: build ## Get built image size
