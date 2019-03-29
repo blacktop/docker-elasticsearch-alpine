@@ -4,15 +4,14 @@ LABEL maintainer "https://github.com/blacktop"
 
 RUN apk add --no-cache openjdk8-jre su-exec
 
-ENV VERSION 7.0.0-rc1
+ENV VERSION 6.7.0
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
-ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz"
-ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz.asc"
-ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz.sha512"
-ENV ES_TARBALL_SHA "9eae47c7557d5bd9b28e4cd88ea2fd3fb3c3f9e15e165f77ac037917f3f88601604a5253e6d48fd9bda5e0e50b85349c625e49139525f718d0e003ca3b3d2a9d"
+ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz"
+ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz.asc"
+ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz.sha512"
+ENV ES_TARBALL_SHA "9acf1aa19ca16cb9f3e00ac90e8df71d2f4ad01f0880ee4bbf35de8048295d34131553d50421121ffff018f86c547b57e8046ee8bc02079aed2adabee0600e2d"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
-# https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.0.0-beta1-linux-x86_64.tar.gz
-# https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.0.0-beta1-linux-x86_64.tar.gz.sha512
+# https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-6.3.0.zip
 RUN apk add --no-cache bash
 RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   && set -ex \
@@ -49,9 +48,6 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   done \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
-
-# TODO: remove this (it removes X-Pack ML so it works on Alpine)
-RUN rm -rf /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64
 
 COPY config/elastic /usr/share/elasticsearch/config
 COPY config/logrotate /etc/logrotate.d/elasticsearch
