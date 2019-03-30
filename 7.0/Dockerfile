@@ -9,7 +9,7 @@ ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz"
 ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz.asc"
 ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz.sha512"
-ENV ES_TARBALL_SHA "9eae47c7557d5bd9b28e4cd88ea2fd3fb3c3f9e15e165f77ac037917f3f88601604a5253e6d48fd9bda5e0e50b85349c625e49139525f718d0e003ca3b3d2a9d"
+ENV ES_TARBALL_SHA "a2f85fe92254ff5e6d4bf182e6ed22fec2bf17d7f91f409d70720714661c5abc957ad9e51c994d6ad15a4bfafe6a79fd703d90bf9aabb1564fa1b74b88a26471"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 # https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.0.0-beta1-linux-x86_64.tar.gz
 # https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.0.0-beta1-linux-x86_64.tar.gz.sha512
