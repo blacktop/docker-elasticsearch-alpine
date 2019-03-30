@@ -48,10 +48,6 @@ RUN set -ex \
 	chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
-# Install geoip/user-agent plugin
-RUN elasticsearch-plugin install -b ingest-geoip
-RUN elasticsearch-plugin install -b ingest-user-agent
-
 COPY config/elastic/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
 COPY config/x-pack/log4j2.properties /usr/share/elasticsearch/config/x-pack/
 COPY config/logrotate /etc/logrotate.d/elasticsearch
