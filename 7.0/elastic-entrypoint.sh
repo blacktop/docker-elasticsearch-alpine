@@ -17,6 +17,7 @@ do
     fi
 done < <(env)
 
+export JAVA_HOME=$(dirname "$(dirname "$(readlink -f "$(which javac || which java)")")")
 export ES_JAVA_OPTS="-Des.cgroups.hierarchy.override=/ $ES_JAVA_OPTS"
 
 # Determine if x-pack is enabled
