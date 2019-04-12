@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --no-cache jq
+            apk add --no-cache jq wget
       - restore_cache:
           keys:
             - v1-{{ .Branch }}
@@ -45,10 +45,17 @@ jobs:
           paths:
             - /caches/app.tar
       - run:
+          name: Download wait-for-es
+          command: |
+            wget https://github.com/blacktop/wait-for-es/releases/download/0.1.1/wait-for-es_0.1.1_Linux_x86_64.tar.gz
+            tar xzf wait-for-es_0.1.1_Linux_x86_64.tar.gz
+            ls -lah
+      - run:
           name: Run elasticsearch
           command: |
             set -x
-            docker run -d --name es -p 9200:9200 -e cluster.name=testcluster -e discovery.type=single-node app; sleep 10;
+            docker run -d --name es -p 9200:9200 -e cluster.name=testcluster -e discovery.type=single-node app
+            wait-for-es
             docker logs es
       - run:
           name: Run test

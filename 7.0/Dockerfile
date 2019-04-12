@@ -11,8 +11,7 @@ ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz
 ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz.sha512"
 ENV ES_TARBALL_SHA "74b2202d933dba5e2081a027f6dd707c6892fc78ecb1de0d068a8c5c5d55b7a3d4ab0be3b5fc62528b36f9639948462da202c4eb7bda77e36c3f96162d1d5356"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
-# https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.0.0-beta1-linux-x86_64.tar.gz
-# https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.0.0-beta1-linux-x86_64.tar.gz.sha512
+
 RUN apk add --no-cache bash
 RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   && set -ex \
