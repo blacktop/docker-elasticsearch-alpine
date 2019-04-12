@@ -16,7 +16,7 @@ RUN set -ex; \
 # https://www.elastic.co/guide/en/elasticsearch/reference/5.0/deb.html
 RUN set -x \
 	&& apt-get update && apt-get install -y --no-install-recommends apt-transport-https && rm -rf /var/lib/apt/lists/* \
-	&& echo 'deb https://artifacts.elastic.co/packages/6.x/apt stable main' > /etc/apt/sources.list.d/elasticsearch.list
+	&& echo 'deb https://artifacts.elastic.co/packages/7.x/apt stable main' > /etc/apt/sources.list.d/elasticsearch.list
 
 ENV ELASTICSEARCH_VERSION 7.0.0
 ENV ELASTICSEARCH_DEB_VERSION 7.0.0
