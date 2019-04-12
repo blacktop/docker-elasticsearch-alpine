@@ -55,7 +55,7 @@ jobs:
           command: |
             set -x
             docker run -d --name es -p 9200:9200 -e cluster.name=testcluster -e discovery.type=single-node app
-            wait-for-es
+            ./wait-for-es
             docker logs es
       - run:
           name: Run test
