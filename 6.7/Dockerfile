@@ -9,7 +9,7 @@ ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz"
 ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz.asc"
 ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz.sha512"
-ENV ES_TARBALL_SHA "4865ebd3403593048b3f922769d6d09eb1d53a42cf206cdcba7c30e330b39d9bd57f9f0979a23fcf0ca7636d84ce85de210fdf655447fab7ecebb35bffdd3323"
+ENV ES_TARBALL_SHA "2c81159ff2639d77d028114ef09c6cb9a4f0d1880268255812eb033cfddd9eb97afe8f468df8b1fb1f2910fb7b3d87a02eb6a248453fc2aa11e2c964f3f2cbcb"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 # https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-6.3.0.zip
 RUN apk add --no-cache bash
