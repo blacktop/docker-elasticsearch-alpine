@@ -8,7 +8,7 @@ LATEST ?=$(shell cat LATEST)
 
 all: update build size test
 
-BUILDS=$(LATEST) 7.0 6.7 5.6
+BUILDS=$(LATEST) 7.0 6.8 6.7 5.6
 .PHONY: update
 update:
 	$(foreach build,$(BUILDS),NAME=$(NAME) BUILD=$(build) $(MAKE) dockerfile;)
