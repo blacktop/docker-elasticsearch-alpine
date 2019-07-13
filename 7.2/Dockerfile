@@ -1,8 +1,8 @@
-FROM alpine:3.9
+FROM alpine:3.10
 
 LABEL maintainer "https://github.com/blacktop"
 
-RUN apk add --no-cache openjdk8-jre su-exec
+RUN apk add --no-cache openjdk11-jre-headless su-exec
 
 ENV VERSION 7.2.0
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
@@ -46,7 +46,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   mkdir -p "$path"; \
   chown -R elasticsearch:elasticsearch "$path"; \
   done \
-  && rm -rf /tmp/* \
+  && rm -rf /tmp/* /usr/share/elasticsearch/jdk \
   && apk del --purge .build-deps
 
 # TODO: remove this (it removes X-Pack ML so it works on Alpine)

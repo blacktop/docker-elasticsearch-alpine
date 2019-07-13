@@ -2,7 +2,7 @@
 
 # docker-elasticsearch-alpine
 
-[![CircleCI](https://circleci.com/gh/blacktop/docker-elasticsearch-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-elasticsearch-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/elasticsearch.svg)](https://hub.docker.com/r/blacktop/elasticsearch/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/elasticsearch.svg)](https://hub.docker.com/r/blacktop/elasticsearch/) [![Docker Image](https://img.shields.io/badge/docker%20image-601MB-blue.svg)](https://hub.docker.com/r/blacktop/elasticsearch/)
+[![CircleCI](https://circleci.com/gh/blacktop/docker-elasticsearch-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-elasticsearch-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/elasticsearch.svg)](https://hub.docker.com/r/blacktop/elasticsearch/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/elasticsearch.svg)](https://hub.docker.com/r/blacktop/elasticsearch/) [![Docker Image](https://img.shields.io/badge/docker%20image-358MB-blue.svg)](https://hub.docker.com/r/blacktop/elasticsearch/)
 
 Alpine Linux based [Elasticsearch](https://www.elastic.co/products/elasticsearch) Docker Image
 
@@ -45,8 +45,8 @@ Compare Image Sizes:
 
 ```bash
 REPOSITORY               TAG                 SIZE
-blacktop/elasticsearch   latest              601MB
-blacktop/elasticsearch   7.2                 601MB
+blacktop/elasticsearch   latest              358MB
+blacktop/elasticsearch   7.2                 358MB
 blacktop/elasticsearch   7.1                 638MB
 blacktop/elasticsearch   7.0                 638MB
 blacktop/elasticsearch   6.8                 192MB
