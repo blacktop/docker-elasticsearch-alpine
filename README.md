@@ -47,8 +47,8 @@ Compare Image Sizes:
 REPOSITORY               TAG                 SIZE
 blacktop/elasticsearch   latest              358MB
 blacktop/elasticsearch   7.2                 358MB
-blacktop/elasticsearch   7.1                 638MB
-blacktop/elasticsearch   7.0                 638MB
+blacktop/elasticsearch   7.1                 304MB
+blacktop/elasticsearch   7.0                 304MB
 blacktop/elasticsearch   6.8                 192MB
 blacktop/elasticsearch   6.7                 192MB
 blacktop/elasticsearch   6.6                 128MB
