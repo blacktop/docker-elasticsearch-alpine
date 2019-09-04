@@ -6,10 +6,10 @@ RUN apk add --no-cache openjdk8-jre su-exec
 
 ENV VERSION 7.0.1
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
-ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz"
-ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz.asc"
-ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz.sha512"
-ENV ES_TARBALL_SHA "3f6195940f4715837ae15730df4ff6a55289136cc0530a3d34b6ade434bd33ac89d7c55e5e03dbc3af77809e6216d88c017d3ac72959f30e3fadbeb2fb864337"
+ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}-no-jdk-linux-x86_64.tar.gz"
+ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}-no-jdk-linux-x86_64.tar.gz.asc"
+ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}-no-jdk-linux-x86_64.tar.gz.sha512"
+ENV ES_TARBALL_SHA "301e552b221369cca8365ee64d8b52b5e8abea0e26159f7a6e77a1722fb1107641fe2472138869f5156bbbf43c74e62ffb22d0c35062190505f7504e3f571e16"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache bash

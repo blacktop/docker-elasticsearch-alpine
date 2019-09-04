@@ -3,3 +3,4 @@ build
 *.bu
 
 .vagrant/
+.vscode/settings.json

@@ -8,5 +8,5 @@ discovery.zen.minimum_master_nodes: 1
 node.master: true
 node.ingest: true
 node.data: true
-xpack.ml.enabled: false
+
 discovery.type: "single-node"
