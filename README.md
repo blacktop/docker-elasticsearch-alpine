@@ -8,42 +8,34 @@ Alpine Linux based [Elasticsearch](https://www.elastic.co/products/elasticsearch
 
 **Table of Contents**
 
-- [Dependencies](#dependencies)
-- [Image Tags](#image-tags)
-- [Getting Started](#getting-started)
-- [Documentation](#documentation)
-
-  - [To create an elasticsearch cluster](docs/create.md)
-  - [To increase the HEAP_SIZE to 2GB](docs/options.md)
-  - [To monitor the clusters metrics using dockerbeat](docs/dockerbeat.md)
-  - [To run in production](docs/production.md)
-
-- [Issues](#issues)
-
-- [Credits](#credits)
-
-- [CHANGELOG](#changelog)
-
-- [Contributing](#contributing)
-
-- [License](#license)
+* [Dependencies](#dependencies)
+* [Image Tags](#image-tags)
+* [Getting Started](#getting-started)
+* [Documentation](#documentation)
+  + [To create an elasticsearch cluster](docs/create.md)
+  + [To increase the HEAP_SIZE to 2GB](docs/options.md)
+  + [To monitor the clusters metrics using dockerbeat](docs/dockerbeat.md)
+  + [To run in production](docs/production.md)
+* [Issues](#issues)
+* [Credits](#credits)
+* [License](#license)
 
 ## Why?
 
 Compare Image Sizes:
 
-- official elasticsearch = 574 MB
-- blacktop/elasticsearch = 119 MB
+* official elasticsearch = 807 MB
+* blacktop/elasticsearch = 289 MB
 
-**blacktop version is 455 MB smaller !**
+**blacktop version is 518 MB smaller !**
 
 ## Dependencies
 
-- [alpine:3.8](https://hub.docker.com/_/alpine/)
+* [alpine:3.10](https://hub.docker.com/_/alpine/)
 
 ## Image Tags
 
-```bash
+``` bash
 REPOSITORY               TAG                 SIZE
 blacktop/elasticsearch   latest              289MB
 blacktop/elasticsearch   7.3                 289MB
@@ -75,22 +67,22 @@ blacktop/elasticsearch   1.7                 142.7MB
 
 ## Getting Started
 
-```bash
+``` bash
 $ docker run -d --name elastic -p 9200:9200 blacktop/elasticsearch
 ```
 
 ## Documentation
 
-- [To create an elasticsearch cluster](docs/create.md)
-- [To increase the HEAP_SIZE to 2GB](docs/options.md)
-- [To monitor the clusters metrics using dockerbeat](docs/dockerbeat.md)
-- [To run in production](docs/production.md)
+* [To create an elasticsearch cluster](docs/create.md)
+* [To increase the HEAP_SIZE to 2GB](docs/options.md)
+* [To monitor the clusters metrics using dockerbeat](docs/dockerbeat.md)
+* [To run in production](docs/production.md)
 
 ## Known Issues :warning:
 
 I have noticed when running the new **5.0+** version on a linux host you need to increase the memory map areas with the following command
 
-```bash
+``` bash
 sudo sysctl -w vm.max_map_count=262144
 ```
 
@@ -102,16 +94,7 @@ Find a bug? Want more features? Find something missing in the documentation? Let
 
 Heavily (if not entirely) influenced by https://github.com/docker-library/elasticsearch<br> Production docs from https://stefanprodan.com/2016/elasticsearch-cluster-with-docker/
 
-## CHANGELOG
-
-See [`CHANGELOG.md`](https://github.com/blacktop/docker-elasticsearch-alpine/blob/master/CHANGELOG.md)
-
-## Contributing
-
-[See all contributors on GitHub](https://github.com/blacktop/docker-elasticsearch-alpine/graphs/contributors).
-
-Please update the [CHANGELOG.md](https://github.com/blacktop/docker-elasticsearch-alpine/blob/master/CHANGELOG.md) and submit a [Pull Request on GitHub](https://help.github.com/articles/using-pull-requests/).
-
 ## License
 
 MIT Copyright (c) 2016-2019 **blacktop**
+
