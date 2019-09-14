@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Hello world action step
       id: latest
-      uses: blacktop/hello-world-docker-action@v1
+      uses: blacktop/get-latest-version-action@master
     - name: Echo version
       run: echo 'Version is ${{ steps.latest.outputs.latest }}.'
     - name: Build the Docker image
