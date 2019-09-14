@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Get latest version
-      run: echo 'The time was ${{ steps.hello.outputs.time }}.'
+      run: cat ./LATEST
       id: latest
     - name: Echo version
       run: echo 'Version is ${{ steps.latest.outputs }}.'
