@@ -11,6 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: cd ${LATEST}; docker build . --file Dockerfile --tag blacktop/elasticsearch:${LATEST}
       env:
         latest: $(cat LATEST)
+      run: |
+        cd ${LATEST}; docker build . --file Dockerfile --tag blacktop/elasticsearch:${LATEST}
