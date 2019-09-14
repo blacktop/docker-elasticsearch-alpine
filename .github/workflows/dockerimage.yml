@@ -17,6 +17,6 @@ jobs:
       run: echo 'Version is ${{ steps.latest.outputs }}.'
     - name: Build the Docker image
       env:
-        latest: $(cat LATEST)
+        latest: $(cat ./LATEST)
       run: |
         cd ${LATEST}; docker build . --file Dockerfile --tag blacktop/elasticsearch:${LATEST}
