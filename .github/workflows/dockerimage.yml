@@ -10,8 +10,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Hello world action step
+      id: latest
+      uses: actions/hello-world-docker-action@v1
+    - name: Echo version
+      run: echo 'Version is ${{ steps.latest.outputs.latest }}.'
     - name: Build the Docker image
       env:
-        latest: ${{ cat ./LATEST }}
+        latest: ${{ steps.latest.outputs.latest }}
       run: |
         cd ${LATEST}; docker build . --file Dockerfile --tag blacktop/elasticsearch:${LATEST}
