@@ -38,6 +38,7 @@ Compare Image Sizes:
 ``` bash
 REPOSITORY               TAG                 SIZE
 blacktop/elasticsearch   latest              288MB
+blacktop/elasticsearch   7.5                 288MB
 blacktop/elasticsearch   7.4                 288MB
 blacktop/elasticsearch   7.3                 289MB
 blacktop/elasticsearch   7.2                 358MB
