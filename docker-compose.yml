@@ -1,77 +1,29 @@
-version: "3"
-
+version: "3.7"
 services:
-  #############################
-  # ELASTICSEARCH MASTER NODE #
-  #############################
-  master:
-    restart: unless-stopped
-    image: blacktop/elasticsearch:6.2
+  elasticsearch:
+    image: blacktop/elasticsearch:7.6
+    container_name: elasticsearch
+    hostname: elasticsearch
     environment:
-      - cluster.name=docker-cluster
-      - node.master=true
-      - node.ingest=false
-      - node.data=false
-    volumes:
-      - data:/usr/share/elasticsearch/data
-    networks:
-      - elastic
-  ####################################
-  # ELASTICSEARCH CLIENT/INGEST NODE #
-  ####################################
-  ingest:
-    restart: unless-stopped
-    image: blacktop/elasticsearch:6.2
-    environment:
-      - cluster.name=docker-cluster
-      - node.master=true
-      - node.ingest=true
-      - node.data=false
-      - discovery.zen.ping.unicast.hosts=master
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     ports:
       - "9200:9200"
-    links:
-     - master:elastic-master
+      - "9300:9300"
     networks:
-      - elastic
-  ###########################
-  # ELASTICSEARCH DATA NODE #
-  ###########################
-  data:
-    restart: unless-stopped
-    image: blacktop/elasticsearch:6.2
-    environment:
-      - ES_JAVA_OPTS=-Xms2g -Xmx2g
-      - cluster.name=docker-cluster
-      - node.master=false
-      - node.ingest=false
-      - node.data=true
-      - discovery.zen.ping.unicast.hosts=master
-    links:
-     - master:elastic-master
-    # volumes:
-    #   - data:/usr/share/elasticsearch/data
-    networks:
-      - elastic
-  ###############
-  # KIBANA NODE #
-  ###############
+    - default
+
   kibana:
-    image: blacktop/kibana:6.2
+    image: blacktop/kibana:7.6
+    container_name: kibana
+    hostname: kibana
     ports:
-      - "80:5601"
-    links:
-     - ingest:elasticsearch
+      - "5601:5601"
     networks:
-      - elastic
-#############################
-# ELASTICSEARCH DATA VOLUME #
-#############################
-volumes:
-  data:
-################################
-# ELASTICSEARCH BRIDGE NETWORK #
-################################
+    - default
+
 networks:
-  elastic:
-    driver: bridge
+  default:

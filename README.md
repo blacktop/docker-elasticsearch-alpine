@@ -8,17 +8,16 @@ Alpine Linux based [Elasticsearch](https://www.elastic.co/products/elasticsearch
 
 **Table of Contents**
 
-* [Dependencies](#dependencies)
-* [Image Tags](#image-tags)
-* [Getting Started](#getting-started)
-* [Documentation](#documentation)
-  + [To create an elasticsearch cluster](docs/create.md)
-  + [To increase the HEAP_SIZE to 2GB](docs/options.md)
-  + [To monitor the clusters metrics using dockerbeat](docs/dockerbeat.md)
-  + [To run in production](docs/production.md)
-* [Issues](#issues)
-* [Credits](#credits)
-* [License](#license)
+- [docker-elasticsearch-alpine](#docker-elasticsearch-alpine)
+  - [Why?](#why)
+  - [Dependencies](#dependencies)
+  - [Image Tags](#image-tags)
+  - [Getting Started](#getting-started)
+  - [Documentation](#documentation)
+  - [Known Issues :warning:](#known-issues-warning)
+  - [Issues](#issues)
+  - [Credits](#credits)
+  - [License](#license)
 
 ## Why?
 
@@ -99,5 +98,5 @@ Heavily (if not entirely) influenced by https://github.com/docker-library/elasti
 
 ## License
 
-MIT Copyright (c) 2016-2019 **blacktop**
+MIT Copyright (c) 2016-2020 **blacktop**
 
