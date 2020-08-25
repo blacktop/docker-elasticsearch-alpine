@@ -18,8 +18,8 @@ RUN set -x \
 	&& apt-get update && apt-get install -y --no-install-recommends apt-transport-https && rm -rf /var/lib/apt/lists/* \
 	&& echo 'deb https://artifacts.elastic.co/packages/7.x/apt stable main' > /etc/apt/sources.list.d/elasticsearch.list
 
-ENV ELASTICSEARCH_VERSION 7.8.1
-ENV ELASTICSEARCH_DEB_VERSION 7.8.1
+ENV ELASTICSEARCH_VERSION 7.9.0
+ENV ELASTICSEARCH_DEB_VERSION 7.9.0
 ENV ELASTIC_CONTAINER=true
 
 RUN set -x \
