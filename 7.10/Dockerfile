@@ -1,10 +1,10 @@
-FROM alpine:3.12
+FROM alpine:3.13
 
 LABEL maintainer "https://github.com/blacktop"
 
 RUN apk add --no-cache openjdk11-jre-headless su-exec
 
-ENV VERSION 7.10.1
+ENV VERSION 7.10.2
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}-no-jdk-linux-x86_64.tar.gz"
 ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}-no-jdk-linux-x86_64.tar.gz.asc"
