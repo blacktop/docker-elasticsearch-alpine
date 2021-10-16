@@ -23,8 +23,8 @@ Alpine Linux based [Elasticsearch](https://www.elastic.co/products/elasticsearch
 
 Compare Image Sizes:
 
-* official elasticsearch = 807 MB
-* blacktop/elasticsearch = 289 MB
+* official elasticsearch = 791.6 MB
+* blacktop/elasticsearch = 447.28 MB
 
 **blacktop version is 518 MB smaller !**
 
@@ -103,5 +103,5 @@ Heavily (if not entirely) influenced by https://github.com/docker-library/elasti
 
 ## License
 
-MIT Copyright (c) 2016-2020 **blacktop**
+MIT Copyright (c) 2016-2021 **blacktop**
 
