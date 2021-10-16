@@ -53,9 +53,14 @@ jobs:
           context: ./7.15
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
+            blacktop/elasticsearch:latest
             blacktop/elasticsearch:7
             blacktop/elasticsearch:7.15
             blacktop/elasticsearch:7.15.1
+            ghcr.io/blacktop/elasticsearch:latest
+            ghcr.io/blacktop/elasticsearch:7
+            ghcr.io/blacktop/elasticsearch:7.15
+            ghcr.io/blacktop/elasticsearch:7.15.1
           labels: ${{ steps.meta.outputs.labels }}
 
       # - name: Build and push Docker image (X-Pack)
