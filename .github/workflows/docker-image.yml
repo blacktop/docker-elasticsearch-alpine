@@ -1,0 +1,72 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Publish Docker Image
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  push_to_registries:
+    name: Push Docker image to multiple registries
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      -
+        name: Check out the repo
+        uses: actions/checkout@v2
+
+      -
+        name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            blacktop/elasticsearch
+            ghcr.io/${{ github.repository }}
+
+      -
+        name: Docker Login
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      -
+        name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image (v7)
+        id: docker_build_7
+        uses: docker/build-push-action@v2
+        with:
+          context: ./3.2
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            blacktop/elasticsearch:7
+            blacktop/elasticsearch:7.15
+            blacktop/elasticsearch:7.15.1
+          labels: ${{ steps.meta.outputs.labels }}
+
+      # - name: Build and push Docker image (X-Pack)
+      #   id: docker_build_x_pack
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: ./x-pack
+      #     push: ${{ github.event_name != 'pull_request' }}
+      #     tags: |
+      #       blacktop/elasticsearch:x-pack
+      #       blacktop/elasticsearch:x-pack-7
+      #       blacktop/elasticsearch:x-pack-7.15
+      #       blacktop/elasticsearch:x-pack-7.15.1
+      #     labels: ${{ steps.meta.outputs.labels }}
