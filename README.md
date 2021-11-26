@@ -49,7 +49,7 @@ blacktop/elasticsearch   7.3                 289MB
 blacktop/elasticsearch   7.2                 358MB
 blacktop/elasticsearch   7.1                 304MB
 blacktop/elasticsearch   7.0                 304MB
-blacktop/elasticsearch   6.8                 198MB
+blacktop/elasticsearch   6.8                 281MB
 blacktop/elasticsearch   6.7                 192MB
 blacktop/elasticsearch   6.6                 128MB
 blacktop/elasticsearch   6.5                 127MB
