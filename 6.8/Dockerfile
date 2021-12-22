@@ -4,12 +4,12 @@ LABEL maintainer "https://github.com/blacktop"
 
 RUN apk add --no-cache openjdk11-jre-headless bash su-exec
 
-ENV VERSION 6.8.13
+ENV VERSION 6.8.22
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz"
 ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz.asc"
 ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-oss-${VERSION}.tar.gz.sha512"
-ENV ES_TARBALL_SHA "e06b3486585e67f1e34e4268834b6625de6c4dcc380b15551306f42b02b5b2a0997fa2c26e82d965e6040cbf2367f399d4802e881fc649972382c895fa925573"
+ENV ES_TARBALL_SHA "44019994f9a59a1d96ffc54847a4a7c90f70ece2c661c710878f643d6439d83b7ee6a205f445b1bfb2e7ab3de733434a6241f7b454159142e6e68255e8807e52"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
   PATH=/usr/lib/jvm/default-jvm/bin:$PATH
