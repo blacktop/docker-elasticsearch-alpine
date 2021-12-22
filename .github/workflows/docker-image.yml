@@ -56,10 +56,10 @@ jobs:
           tags: |
             blacktop/elasticsearch:6
             blacktop/elasticsearch:6.8
-            blacktop/elasticsearch:6.8.13
+            blacktop/elasticsearch:6.8.22
             ghcr.io/blacktop/elasticsearch:6
             ghcr.io/blacktop/elasticsearch:6.8
-            ghcr.io/blacktop/elasticsearch:6.8.13
+            ghcr.io/blacktop/elasticsearch:6.8.22
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Build and push Docker image (v7)
