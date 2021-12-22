@@ -54,11 +54,9 @@ jobs:
           context: ./6.8
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            blacktop/elasticsearch:latest
             blacktop/elasticsearch:6
             blacktop/elasticsearch:6.8
             blacktop/elasticsearch:6.8.13
-            ghcr.io/blacktop/elasticsearch:latest
             ghcr.io/blacktop/elasticsearch:6
             ghcr.io/blacktop/elasticsearch:6.8
             ghcr.io/blacktop/elasticsearch:6.8.13
@@ -69,17 +67,17 @@ jobs:
         uses: docker/build-push-action@v2
         timeout-minutes: 20        
         with:
-          context: ./7.15
+          context: ./7.16
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             blacktop/elasticsearch:latest
             blacktop/elasticsearch:7
-            blacktop/elasticsearch:7.15
-            blacktop/elasticsearch:7.15.2
+            blacktop/elasticsearch:7.16
+            blacktop/elasticsearch:7.16.2
             ghcr.io/blacktop/elasticsearch:latest
             ghcr.io/blacktop/elasticsearch:7
-            ghcr.io/blacktop/elasticsearch:7.15
-            ghcr.io/blacktop/elasticsearch:7.15.2
+            ghcr.io/blacktop/elasticsearch:7.16
+            ghcr.io/blacktop/elasticsearch:7.16.2
           labels: ${{ steps.meta.outputs.labels }}
 
       # - name: Build and push Docker image (X-Pack)
