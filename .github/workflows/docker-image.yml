@@ -76,6 +76,7 @@ jobs:
             ghcr.io/blacktop/elasticsearch:7
             ghcr.io/blacktop/elasticsearch:7.16
             ghcr.io/blacktop/elasticsearch:7.16.3
+          platforms: linux/amd64,linux/arm64            
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Build and push Docker image (v8)
@@ -94,6 +95,7 @@ jobs:
             ghcr.io/blacktop/elasticsearch:8
             ghcr.io/blacktop/elasticsearch:8.0
             ghcr.io/blacktop/elasticsearch:8.0.0
+          platforms: linux/amd64,linux/arm64
           labels: ${{ steps.meta.outputs.labels }}
 
       # - name: Build and push Docker image (X-Pack)
