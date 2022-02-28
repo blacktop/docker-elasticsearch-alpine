@@ -2,14 +2,14 @@ FROM alpine:3.15
 
 LABEL maintainer "https://github.com/blacktop"
 
-RUN apk add --no-cache openjdk11-jre-headless su-exec
+RUN apk add --no-cache openjdk17-jre-headless su-exec
 
 ENV VERSION 8.0.0
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
-ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-no-jdk-linux-x86_64.tar.gz"
-ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}-no-jdk-linux-x86_64.tar.gz.asc"
-ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-no-jdk-linux-x86_64.tar.gz.sha512"
-ENV ES_TARBALL_SHA ""
+ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz"
+ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz.asc"
+ENV EXPECTED_SHA_URL "${DOWNLOAD_URL}/elasticsearch-${VERSION}-linux-x86_64.tar.gz.sha512"
+ENV ES_TARBALL_SHA "aede53a3f7ce816a668ff0dbfc5359a1cb20d840162ce2998b245fb42ed90df816e2c9cb9946923c40f225100b00d532e13654e68fd6c1631746caf6ee4f2d9f"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache bash
