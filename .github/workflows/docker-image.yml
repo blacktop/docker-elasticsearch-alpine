@@ -67,15 +67,15 @@ jobs:
         uses: docker/build-push-action@v2
         timeout-minutes: 20        
         with:
-          context: ./7.16
+          context: ./7.17
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             blacktop/elasticsearch:7
-            blacktop/elasticsearch:7.16
-            blacktop/elasticsearch:7.16.3
+            blacktop/elasticsearch:7.17
+            blacktop/elasticsearch:7.17.0
             ghcr.io/blacktop/elasticsearch:7
-            ghcr.io/blacktop/elasticsearch:7.16
-            ghcr.io/blacktop/elasticsearch:7.16.3
+            ghcr.io/blacktop/elasticsearch:7.17
+            ghcr.io/blacktop/elasticsearch:7.17.0
           platforms: linux/amd64,linux/arm64            
           labels: ${{ steps.meta.outputs.labels }}
 
