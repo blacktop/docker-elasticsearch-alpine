@@ -20,7 +20,7 @@ jobs:
     steps:
       -
         name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       -
         name: Extract metadata (tags, labels) for Docker
@@ -54,6 +54,23 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build and push Docker image (v1)
+        id: docker_build_1
+        uses: docker/build-push-action@v2
+        timeout-minutes: 20
+        with:
+          context: ./1.7
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            blacktop/elasticsearch:1
+            blacktop/elasticsearch:1.7
+            blacktop/elasticsearch:1.7.6
+            ghcr.io/blacktop/elasticsearch:1
+            ghcr.io/blacktop/elasticsearch:1.7
+            ghcr.io/blacktop/elasticsearch:1.7.6
+          platforms: linux/amd64,linux/arm64
+          labels: ${{ steps.meta.outputs.labels }}
+
       - name: Build and push Docker image (v6)
         id: docker_build_6
         uses: docker/build-push-action@v2
@@ -81,10 +98,10 @@ jobs:
           tags: |
             blacktop/elasticsearch:7
             blacktop/elasticsearch:7.17
-            blacktop/elasticsearch:7.17.0
+            blacktop/elasticsearch:7.17.2
             ghcr.io/blacktop/elasticsearch:7
             ghcr.io/blacktop/elasticsearch:7.17
-            ghcr.io/blacktop/elasticsearch:7.17.0
+            ghcr.io/blacktop/elasticsearch:7.17.2
           platforms: linux/amd64,linux/arm64
           labels: ${{ steps.meta.outputs.labels }}
 
@@ -93,17 +110,17 @@ jobs:
         uses: docker/build-push-action@v2
         timeout-minutes: 20
         with:
-          context: ./8.0
+          context: ./8.1
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             blacktop/elasticsearch:latest
             blacktop/elasticsearch:8
-            blacktop/elasticsearch:8.0
-            blacktop/elasticsearch:8.0.0
+            blacktop/elasticsearch:8.1
+            blacktop/elasticsearch:8.1.2
             ghcr.io/blacktop/elasticsearch:latest
             ghcr.io/blacktop/elasticsearch:8
-            ghcr.io/blacktop/elasticsearch:8.0
-            ghcr.io/blacktop/elasticsearch:8.0.0
+            ghcr.io/blacktop/elasticsearch:8.1
+            ghcr.io/blacktop/elasticsearch:8.1.2
           platforms: linux/amd64,linux/arm64
           labels: ${{ steps.meta.outputs.labels }}
 
