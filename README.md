@@ -107,4 +107,4 @@ Heavily (if not entirely) influenced by https://github.com/docker-library/elasti
 
 ## License
 
-MIT Copyright (c) 2016-2021 **blacktop**
+MIT Copyright (c) 2016-2022 **blacktop**
