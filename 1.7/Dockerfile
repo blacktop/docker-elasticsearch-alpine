@@ -4,7 +4,7 @@ MAINTAINER blacktop, https://github.com/blacktop
 
 RUN apk-install openjdk8-jre tini su-exec
 
-ENV ELASTIC 1.7.5
+ENV ELASTIC 1.7.6
 
 RUN apk-install -t build-deps wget ca-certificates \
   && cd /tmp \
