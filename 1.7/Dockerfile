@@ -1,12 +1,12 @@
-FROM gliderlabs/alpine:3.4
+FROM alpine:3.14
 
 MAINTAINER blacktop, https://github.com/blacktop
 
-RUN apk-install openjdk8-jre tini su-exec
+RUN apk add --no-cache openjdk8-jre-base tini su-exec
 
 ENV ELASTIC 1.7.6
 
-RUN apk-install -t build-deps wget ca-certificates \
+RUN apk add --no-cache -t build-deps wget ca-certificates \
   && cd /tmp \
   && wget -O elasticsearch-$ELASTIC.tar.gz https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-$ELASTIC.tar.gz \
   && tar -xzf elasticsearch-$ELASTIC.tar.gz \

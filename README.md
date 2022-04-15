@@ -73,7 +73,7 @@ blacktop/elasticsearch   5.0                 148.4MB
 blacktop/elasticsearch   2.4                 116MB
 blacktop/elasticsearch   kopf                122MB
 blacktop/elasticsearch   2.3                 139.1MB
-blacktop/elasticsearch   1.7                 142.7MB
+blacktop/elasticsearch   1.7                 114MB
 ```
 
 ## Getting Started
