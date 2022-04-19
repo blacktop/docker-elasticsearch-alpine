@@ -24,9 +24,9 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   if [ "$ES_TARBALL_ASC" ]; then \
   wget --progress=bar:force -O elasticsearch.tar.gz.asc "$ES_TARBALL_ASC"; \
   export GNUPGHOME="$(mktemp -d)"; \
-  ( gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
-  || gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" \
-  || gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY" ); \
+  ( gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$GPG_KEY" \
+  || gpg --keyserver hkp://pgp.mit.edu:80 --recv-keys "$GPG_KEY" \
+  || gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$GPG_KEY" ); \
   gpg --batch --verify elasticsearch.tar.gz.asc elasticsearch.tar.gz; \
   rm -rf "$GNUPGHOME" elasticsearch.tar.gz.asc || true; \
   fi; \
