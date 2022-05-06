@@ -56,7 +56,7 @@ jobs:
 
       - name: Build and push Docker image (v1)
         id: docker_build_1
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         timeout-minutes: 20
         with:
           context: ./1.7
@@ -73,7 +73,7 @@ jobs:
 
       - name: Build and push Docker image (v6)
         id: docker_build_6
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         timeout-minutes: 20
         with:
           context: ./6.8
@@ -90,7 +90,7 @@ jobs:
 
       - name: Build and push Docker image (v7)
         id: docker_build_7
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         timeout-minutes: 20
         with:
           context: ./7.17
@@ -107,7 +107,7 @@ jobs:
 
       - name: Build and push Docker image (v8)
         id: docker_build_8
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         timeout-minutes: 20
         with:
           context: ./8.1
@@ -126,7 +126,7 @@ jobs:
 
       # - name: Build and push Docker image (X-Pack)
       #   id: docker_build_x_pack
-      #   uses: docker/build-push-action@v2
+      #   uses: docker/build-push-action@v3
       #   with:
       #     context: ./x-pack
       #     push: ${{ github.event_name != 'pull_request' }}
