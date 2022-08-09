@@ -23,7 +23,7 @@ jobs:
           },
           {
             name: "v2",
-            versions: "1 1.7 1.7.6"
+            versions: "2 2.4 2.4.5"
           },
           {
             name: "v6",
