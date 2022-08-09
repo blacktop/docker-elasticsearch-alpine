@@ -45,7 +45,8 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
 
-      - name: Create images list for $ {{ matrix.versions.name }}
+      - name: Create images list for ${{ matrix.versions.name }}
+        shell: bash
         env:
           REPOSITORY_OWNER: ${{ github.repository_owner }}
           VERSION_LIST: ${{ matrix.versions.versions }}
@@ -62,4 +63,10 @@ jobs:
             IMAGE_LIST="$IMAGE_LIST\nghcr.io/$REPOSITORY_OWNER/elasticsearch:$version"
           done
 
-          echo $IMAGE_LIST
+          echo -e $IMAGE_LIST
+
+          IMAGE_LIST="${IMAGE_LIST//'%'/'%25'}"
+          IMAGE_LIST="${IMAGE_LIST//$'\n'/'%0A'}"
+          IMAGE_LIST="${IMAGE_LIST//$'\r'/'%0D'}"
+
+          echo -e "::set-output name=imageList::$IMAGE_LIST"
