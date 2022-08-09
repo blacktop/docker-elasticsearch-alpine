@@ -59,7 +59,7 @@ jobs:
           fi
 
           for version in $VERSION_LIST; do
-            IMAGE_LIST="$IMAGE_LIST\ghcr.io/$REPOSITORY_OWNER/elasticsearch:$version"
+            IMAGE_LIST="$IMAGE_LIST\nghcr.io/$REPOSITORY_OWNER/elasticsearch:$version"
           done
 
           echo $IMAGE_LIST
