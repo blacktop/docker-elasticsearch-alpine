@@ -65,18 +65,21 @@ jobs:
             LOGIN_DOCKER_HUB=1
             IMAGE_METADATA_LIST="$IMAGE_METADATA_LIST\nblacktop/elasticsearch"
             for version in $VERSION_LIST; do
-              IMAGE_LIST="$IMAGE_LIST\nblacktop/elasticsearch:$version"
+              if [ -z "$IMAGE_LIST" ]; then
+                IMAGE_LIST="blacktop/elasticsearch:$version"
+              else
+                IMAGE_LIST="$IMAGE_LIST,blacktop/elasticsearch:$version"
+              fi
             done
           fi
 
           for version in $VERSION_LIST; do
-            
-            IMAGE_LIST="$IMAGE_LIST\nghcr.io/$REPOSITORY_OWNER/elasticsearch:$version"
+            if [ -z "$IMAGE_LIST" ]; then
+              IMAGE_LIST="ghcr.io/$REPOSITORY_OWNER/elasticsearch:$version"
+            else
+              IMAGE_LIST="$IMAGE_LIST,ghcr.io/$REPOSITORY_OWNER/elasticsearch:$version"
+            fi
           done
-
-          IMAGE_LIST="${IMAGE_LIST//'%'/'%25'}"
-          IMAGE_LIST="${IMAGE_LIST//$'\n'/'%0A'}"
-          IMAGE_LIST="${IMAGE_LIST//$'\r'/'%0D'}"
 
           IMAGE_METADATA_LIST="${IMAGE_METADATA_LIST//'%'/'%25'}"
           IMAGE_METADATA_LIST="${IMAGE_METADATA_LIST//$'\n'/'%0A'}"
