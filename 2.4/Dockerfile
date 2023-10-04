@@ -2,13 +2,13 @@ FROM alpine:3.14
 
 LABEL maintainer "https://github.com/blacktop"
 
-ENV ES_VERSION 2.4.5
+ENV ES_VERSION 2.4.6
 
 ENV DOWNLOAD_URL "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution"
 ENV ES_TARBAL "${DOWNLOAD_URL}/tar/elasticsearch/${ES_VERSION}/elasticsearch-${ES_VERSION}.tar.gz"
 ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/tar/elasticsearch/${ES_VERSION}/elasticsearch-${ES_VERSION}.tar.gz.asc"
 ENV SHA1_URL "${DOWNLOAD_URL}/tar/elasticsearch/${ES_VERSION}/elasticsearch-${ES_VERSION}.tar.gz.sha1"
-ENV ES_TARBALL_SHA1 "180353a1a65995f5e4533ff0a58f18e1e85f28ae"
+ENV ES_TARBALL_SHA1 "c3441bef89cd91206edf3cf3bd5c4b62550e60a9"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache openjdk8-jre tini su-exec java-jna-native \

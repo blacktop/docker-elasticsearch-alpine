@@ -25,7 +25,7 @@ jobs:
           {
             name: "v2",
             context: "2.4",
-            versions: "2 2.4 2.4.5"
+            versions: "2 2.4 2.4.6"
           },
           {
             name: "v6",
