@@ -1,20 +1,19 @@
-FROM alpine:3.5
+FROM alpine:3.14
 
 LABEL maintainer "https://github.com/blacktop"
 
-RUN apk add --no-cache openjdk8-jre tini su-exec
-
-ENV ES_VERSION 2.4.4
+ENV ES_VERSION 2.4.6
 
 ENV DOWNLOAD_URL "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution"
 ENV ES_TARBAL "${DOWNLOAD_URL}/tar/elasticsearch/${ES_VERSION}/elasticsearch-${ES_VERSION}.tar.gz"
 ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/tar/elasticsearch/${ES_VERSION}/elasticsearch-${ES_VERSION}.tar.gz.asc"
 ENV SHA1_URL "${DOWNLOAD_URL}/tar/elasticsearch/${ES_VERSION}/elasticsearch-${ES_VERSION}.tar.gz.sha1"
-ENV ES_TARBALL_SHA1 "cdb5068d1baa07388e522c3bc04cca38aa8f3048"
+ENV ES_TARBALL_SHA1 "c3441bef89cd91206edf3cf3bd5c4b62550e60a9"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
-RUN apk add --no-cache bash
-RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
+RUN apk add --no-cache openjdk8-jre tini su-exec java-jna-native \
+  && apk add --no-cache bash \
+  && apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   && cd /tmp \
   && echo "===> Install Elasticsearch..." \
   && EXPECTED_SHA=$(wget -O - ${SHA1_URL}) \

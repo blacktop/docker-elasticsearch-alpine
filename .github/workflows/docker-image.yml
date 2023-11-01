@@ -8,131 +8,119 @@ name: Publish Docker Image
 on:
   push:
     branches:
-      - '**'
+      - 'master'
 
 jobs:
   push_to_registries:
     name: Push Docker image to multiple registries
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        versions: [
+          {
+            name: "v1",
+            context: "1.7",
+            versions: "1 1.7 1.7.6"
+          },
+          {
+            name: "v2",
+            context: "2.4",
+            versions: "2 2.4 2.4.6"
+          },
+          {
+            name: "v6",
+            context: "6.8",
+            versions: "6 6.8 6.8.23"
+          },
+          {
+            name: "v7",
+            context: "7.17",
+            versions: "7 7.17 7.17.2"
+          },
+          {
+            name: "v8",
+            context: "8.1",
+            versions: "8 8.1 8.1.2"
+          }
+        ]
     permissions:
       packages: write
       contents: read
     steps:
-      -
-        name: Check out the repo
+      - name: Check out the repo
         uses: actions/checkout@v3
 
-      -
-        name: Extract metadata (tags, labels) for Docker
+      - name: Create images list for ${{ matrix.versions.name }}
+        shell: bash
+        id: imageListGenerator
+        env:
+          REPOSITORY_OWNER: ${{ github.repository_owner }}
+          VERSION_LIST: ${{ matrix.versions.versions }}
+        run: |
+          IMAGE_LIST=""
+          IMAGE_METADATA_LIST="ghcr.io/$REPOSITORY_OWNER/elasticsearch"
+          LOGIN_DOCKER_HUB=0
+
+          if [ "$REPOSITORY_OWNER" = "blacktop" ] ; then
+            LOGIN_DOCKER_HUB=1
+            IMAGE_METADATA_LIST="$IMAGE_METADATA_LIST\nblacktop/elasticsearch"
+            for version in $VERSION_LIST; do
+              if [ -z "$IMAGE_LIST" ]; then
+                IMAGE_LIST="blacktop/elasticsearch:$version"
+              else
+                IMAGE_LIST="$IMAGE_LIST,blacktop/elasticsearch:$version"
+              fi
+            done
+          fi
+
+          for version in $VERSION_LIST; do
+            if [ -z "$IMAGE_LIST" ]; then
+              IMAGE_LIST="ghcr.io/$REPOSITORY_OWNER/elasticsearch:$version"
+            else
+              IMAGE_LIST="$IMAGE_LIST,ghcr.io/$REPOSITORY_OWNER/elasticsearch:$version"
+            fi
+          done
+
+          IMAGE_METADATA_LIST="${IMAGE_METADATA_LIST//'%'/'%25'}"
+          IMAGE_METADATA_LIST="${IMAGE_METADATA_LIST//$'\n'/'%0A'}"
+          IMAGE_METADATA_LIST="${IMAGE_METADATA_LIST//$'\r'/'%0D'}"
+
+          echo "::set-output name=imageList::$IMAGE_LIST"
+          echo "::set-output name=imageMetadataList::$IMAGE_METADATA_LIST"
+          echo "::set-output name=loginDockerHub::$LOGIN_DOCKER_HUB"
+
+      - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: |
-            blacktop/elasticsearch
-            ghcr.io/${{ github.repository }}
+          images: ${{ steps.imageListGenerator.outputs.imageMetadataList }}
 
-      -
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      -
-        name: Docker Login
+      - name: Docker Login
         uses: docker/login-action@v2
+        if: ${{ steps.imageListGenerator.outputs.loginDockerHub == '1' }}
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      -
-        name: Log in to the Container registry
+      - name: Log in to GHCR Container registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image (v1)
-        id: docker_build_1
+      - name: Build and push Docker image
         uses: docker/build-push-action@v3
         timeout-minutes: 20
         with:
-          context: ./1.7
+          context: ./${{ matrix.versions.context }}
           push: ${{ github.event_name != 'pull_request' }}
-          tags: |
-            blacktop/elasticsearch:1
-            blacktop/elasticsearch:1.7
-            blacktop/elasticsearch:1.7.6
-            ghcr.io/blacktop/elasticsearch:1
-            ghcr.io/blacktop/elasticsearch:1.7
-            ghcr.io/blacktop/elasticsearch:1.7.6
+          tags: ${{ steps.imageListGenerator.outputs.imageList }}
           platforms: linux/amd64,linux/arm64
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Build and push Docker image (v6)
-        id: docker_build_6
-        uses: docker/build-push-action@v3
-        timeout-minutes: 20
-        with:
-          context: ./6.8
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: |
-            blacktop/elasticsearch:6
-            blacktop/elasticsearch:6.8
-            blacktop/elasticsearch:6.8.23
-            ghcr.io/blacktop/elasticsearch:6
-            ghcr.io/blacktop/elasticsearch:6.8
-            ghcr.io/blacktop/elasticsearch:6.8.23
-          platforms: linux/amd64,linux/arm64
-          labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Build and push Docker image (v7)
-        id: docker_build_7
-        uses: docker/build-push-action@v3
-        timeout-minutes: 20
-        with:
-          context: ./7.17
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: |
-            blacktop/elasticsearch:7
-            blacktop/elasticsearch:7.17
-            blacktop/elasticsearch:7.17.2
-            ghcr.io/blacktop/elasticsearch:7
-            ghcr.io/blacktop/elasticsearch:7.17
-            ghcr.io/blacktop/elasticsearch:7.17.2
-          platforms: linux/amd64,linux/arm64
-          labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Build and push Docker image (v8)
-        id: docker_build_8
-        uses: docker/build-push-action@v3
-        timeout-minutes: 20
-        with:
-          context: ./8.1
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: |
-            blacktop/elasticsearch:latest
-            blacktop/elasticsearch:8
-            blacktop/elasticsearch:8.1
-            blacktop/elasticsearch:8.1.2
-            ghcr.io/blacktop/elasticsearch:latest
-            ghcr.io/blacktop/elasticsearch:8
-            ghcr.io/blacktop/elasticsearch:8.1
-            ghcr.io/blacktop/elasticsearch:8.1.2
-          platforms: linux/amd64,linux/arm64
-          labels: ${{ steps.meta.outputs.labels }}
-
-      # - name: Build and push Docker image (X-Pack)
-      #   id: docker_build_x_pack
-      #   uses: docker/build-push-action@v3
-      #   with:
-      #     context: ./x-pack
-      #     push: ${{ github.event_name != 'pull_request' }}
-      #     tags: |
-      #       blacktop/elasticsearch:x-pack
-      #       blacktop/elasticsearch:x-pack-7
-      #       blacktop/elasticsearch:x-pack-7.15
-      #       blacktop/elasticsearch:x-pack-7.15.1
-      #     labels: ${{ steps.meta.outputs.labels }}

@@ -1,10 +1,24 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
+es_opts=''
+
+while IFS='=' read -r envvar_key envvar_value
+do
+    # Elasticsearch env vars need to have at least two dot separated lowercase words, e.g. `cluster.name`
+    if [[ "$envvar_key" =~ ^[a-z]+\.[a-z]+ ]]
+    then
+        if [[ ! -z $envvar_value ]]; then
+          es_opt="-D${envvar_key}=${envvar_value}"
+          es_opts+=" ${es_opt}"
+        fi
+    fi
+done < <(env)
+
 # Add elasticsearch as command if needed
 if [ "${1:0:1}" = '-' ]; then
-	set -- elasticsearch "$@"
+	set -- elasticsearch "$@" ${es_opts}
 fi
 
 ################################################
@@ -24,7 +38,7 @@ if [ "$1" = 'master' -a "$(id -u)" = '0' ]; then
 		chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
 		chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs
 
-		set -- su-exec elasticsearch "$@"
+		set -- su-exec elasticsearch "$@" ${es_opts}
 	fi
 
 	set -- su-exec elasticsearch /sbin/tini -- elasticsearch
@@ -51,7 +65,7 @@ if [ "$1" = 'client' -a "$(id -u)" = '0' ]; then
 		chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
 		chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs
 
-		set -- su-exec elasticsearch "$@"
+		set -- su-exec elasticsearch "$@" ${es_opts}
 	fi
 
 	set -- su-exec elasticsearch /sbin/tini -- elasticsearch
@@ -78,7 +92,7 @@ if [ "$1" = 'data' -a "$(id -u)" = '0' ]; then
 		chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
 		chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs
 
-		set -- su-exec elasticsearch "$@"
+		set -- su-exec elasticsearch "$@" ${es_opts}
 	fi
 
 	set -- su-exec elasticsearch /sbin/tini -- elasticsearch
@@ -91,7 +105,7 @@ if [ "$1" = 'elasticsearch' -a "$(id -u)" = '0' ]; then
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs
 
-	set -- su-exec elasticsearch "$@"
+	set -- su-exec elasticsearch "$@" ${es_opts}
 fi
 
 exec "$@"
